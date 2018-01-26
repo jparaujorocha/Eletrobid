@@ -12,18 +12,18 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PERFIL
+    public partial class Perfil
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PERFIL()
+        public Perfil()
         {
-            this.USUARIOs = new HashSet<USUARIO>();
+            this.Usuarios = new HashSet<Usuario>();
         }
     
-        public int IDPERFIL { get; set; }
-        public string NOME { get; set; }
+        public int IdPerfil { get; set; }
+        public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIOs { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2af28f1a073e44d79d66f497299a97f3" Name="Diagram1">
-        <EntityTypeShape EntityType="EletrobidModel.EMPRESAORIGINARIA" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.EMPRESAREVENDEDORA" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.IMPOSTO" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.IMPOSTOPRODUTO" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.PERFIL" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.PRODUTO" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.TIPOIMPOSTO" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.TIPOPRODUTO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.USUARIO" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
+      <Diagram DiagramId="b96c89d6cb734a2ea6239a3b84edc105" Name="Diagram1">
+        <EntityTypeShape EntityType="EletrobidModel.EmpresaOriginaria" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.EmpresaRevendedora" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Imposto" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.ImpostoProduto" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Perfil" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Produto" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoImposto" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoProduto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Usuario" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
         <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_EMPRESAO" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_EMPRESAR" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_IMPOSTO_REFERENCE_TIPOIMPO" ManuallyRouted="false" />

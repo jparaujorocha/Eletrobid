@@ -12,40 +12,40 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUTO
+    public partial class Produto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRODUTO()
+        public Produto()
         {
-            this.IMPOSTOPRODUTOes = new HashSet<IMPOSTOPRODUTO>();
+            this.ImpostoProdutoes = new HashSet<ImpostoProduto>();
         }
     
-        public int IDPRODUTO { get; set; }
-        public string NOME { get; set; }
-        public string DESCRICAO { get; set; }
-        public string CODIGOITEM { get; set; }
-        public double VALORUNITARIO { get; set; }
-        public int QUANTIDADE { get; set; }
-        public double VALORTOTAL { get; set; }
-        public string IDENTIFICACAONFE { get; set; }
-        public int IDEMPRESAORIGINARIA { get; set; }
-        public Nullable<int> IDEMPRESAREVENDEDORA { get; set; }
-        public System.DateTime DATAENTRADA { get; set; }
-        public Nullable<System.DateTime> DATASAIDA { get; set; }
-        public Nullable<System.DateTime> DATAVENDA { get; set; }
-        public Nullable<double> VALORUNITARIOVENDA { get; set; }
-        public Nullable<double> VALORTOTALVENDA { get; set; }
-        public string CODIGOREFERENCIAVENDA { get; set; }
-        public string CODIGOIDENTIFICADOR { get; set; }
-        public Nullable<double> VALORMINIMOUNITARIOVENDA { get; set; }
-        public string OBSERVACAO { get; set; }
-        public string OBSERVACAOVENDA { get; set; }
-        public int IDTIPOPRODUTO { get; set; }
+        public int IdProduto { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public string CodigoItem { get; set; }
+        public double ValorUnitario { get; set; }
+        public int Quantidade { get; set; }
+        public double ValorTotal { get; set; }
+        public string IdentificacaoNfe { get; set; }
+        public int IdEmpresaOriginaria { get; set; }
+        public Nullable<int> IdEmpresaRevendedora { get; set; }
+        public System.DateTime DataEntrada { get; set; }
+        public Nullable<System.DateTime> DataSaida { get; set; }
+        public Nullable<System.DateTime> DataVenda { get; set; }
+        public Nullable<double> ValorUnitarioVenda { get; set; }
+        public Nullable<double> ValorTotalVenda { get; set; }
+        public string CodigoReferenciaVenda { get; set; }
+        public string CodigoIdentificador { get; set; }
+        public Nullable<double> ValorMinimoUnitarioVenda { get; set; }
+        public string Observacao { get; set; }
+        public string ObservacaoVenda { get; set; }
+        public int IdTipoProduto { get; set; }
     
-        public virtual EMPRESAORIGINARIA EMPRESAORIGINARIA { get; set; }
-        public virtual EMPRESAREVENDEDORA EMPRESAREVENDEDORA { get; set; }
+        public virtual EmpresaOriginaria EmpresaOriginaria { get; set; }
+        public virtual EmpresaRevendedora EmpresaRevendedora { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IMPOSTOPRODUTO> IMPOSTOPRODUTOes { get; set; }
-        public virtual TIPOPRODUTO TIPOPRODUTO { get; set; }
+        public virtual ICollection<ImpostoProduto> ImpostoProdutoes { get; set; }
+        public virtual TipoProduto TipoProduto { get; set; }
     }
 }

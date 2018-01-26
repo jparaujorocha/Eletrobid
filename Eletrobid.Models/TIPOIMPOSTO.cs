@@ -12,18 +12,18 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPOIMPOSTO
+    public partial class TipoImposto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TIPOIMPOSTO()
+        public TipoImposto()
         {
-            this.IMPOSTOes = new HashSet<IMPOSTO>();
+            this.Impostoes = new HashSet<Imposto>();
         }
     
-        public int IDTIPOIMPOSTO { get; set; }
-        public string NOME { get; set; }
+        public int IdTipoImposto { get; set; }
+        public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IMPOSTO> IMPOSTOes { get; set; }
+        public virtual ICollection<Imposto> Impostoes { get; set; }
     }
 }

@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EletrobidModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmpresaOriginaria">
+          <Key>
+            <PropertyRef Name="IdEmpresaOriginaria" />
+          </Key>
+          <Property Name="IdEmpresaOriginaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RazaoSocial" Type="varchar(max)" Nullable="false" />
+          <Property Name="NomeFantasia" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cnpj" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="TelefoneContato1" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="TelefoneContato2" Type="varchar" MaxLength="18" />
+          <Property Name="MargemLucro" Type="float" />
+          <Property Name="Endereco" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cep" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpresaRevendedora">
+          <Key>
+            <PropertyRef Name="IdEmpresaRevendedora" />
+          </Key>
+          <Property Name="IdEmpresaRevendedora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RazaoSocial" Type="varchar(max)" Nullable="false" />
+          <Property Name="NomeFantasia" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cnpj" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="TelefoneContato1" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="TelefoneContato2" Type="varchar" MaxLength="18" />
+          <Property Name="MargemLucro" Type="float" />
+          <Property Name="Endereco" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cep" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imposto">
+          <Key>
+            <PropertyRef Name="IdImposto" />
+          </Key>
+          <Property Name="IdImposto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdTipoImposto" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="DataInicioCobranca" Type="datetime" Nullable="false" />
+          <Property Name="Observacao" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ImpostoProduto">
+          <Key>
+            <PropertyRef Name="IdImpostoProduto" />
+          </Key>
+          <Property Name="IdImpostoProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProduto" Type="int" Nullable="false" />
+          <Property Name="IdImposto" Type="int" Nullable="false" />
+          <Property Name="ValorPagar" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="255" />
+          <Property Name="CodigoItem" Type="varchar(max)" Nullable="false" />
+          <Property Name="ValorUnitario" Type="float" Nullable="false" />
+          <Property Name="Quantidade" Type="int" Nullable="false" />
+          <Property Name="ValorTotal" Type="float" Nullable="false" />
+          <Property Name="IdentificacaoNfe" Type="varchar(max)" />
+          <Property Name="IdEmpresaOriginaria" Type="int" Nullable="false" />
+          <Property Name="IdEmpresaRevendedora" Type="int" />
+          <Property Name="DataEntrada" Type="datetime" Nullable="false" />
+          <Property Name="DataSaida" Type="datetime" />
+          <Property Name="DataVenda" Type="datetime" />
+          <Property Name="ValorUnitarioVenda" Type="float" />
+          <Property Name="ValorTotalVenda" Type="float" />
+          <Property Name="CodigoReferenciaVenda" Type="varchar(max)" />
+          <Property Name="CodigoIdentificador" Type="varchar(max)" />
+          <Property Name="ValorMinimoUnitarioVenda" Type="float" />
+          <Property Name="Observacao" Type="varchar" MaxLength="255" />
+          <Property Name="ObservacaoVenda" Type="varchar" MaxLength="255" />
+          <Property Name="IdTipoProduto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoImposto">
+          <Key>
+            <PropertyRef Name="IdTipoImposto" />
+          </Key>
+          <Property Name="IdTipoImposto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="IdTipoProduto" />
+          </Key>
+          <Property Name="IdTipoProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Apelido" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdPerfil" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_IMPOSTO_REFERENCE_TIPOIMPO">
+          <End Role="TipoImposto" Type="Self.TipoImposto" Multiplicity="1" />
+          <End Role="Imposto" Type="Self.Imposto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoImposto">
+              <PropertyRef Name="IdTipoImposto" />
+            </Principal>
+            <Dependent Role="Imposto">
+              <PropertyRef Name="IdTipoImposto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPOSTOP_REFERENCE_IMPOSTO">
+          <End Role="Imposto" Type="Self.Imposto" Multiplicity="1" />
+          <End Role="ImpostoProduto" Type="Self.ImpostoProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imposto">
+              <PropertyRef Name="IdImposto" />
+            </Principal>
+            <Dependent Role="ImpostoProduto">
+              <PropertyRef Name="IdImposto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPOSTOP_REFERENCE_PRODUTO">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="ImpostoProduto" Type="Self.ImpostoProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="ImpostoProduto">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUTO_REFERENCE_EMPRESAO">
+          <End Role="EmpresaOriginaria" Type="Self.EmpresaOriginaria" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaOriginaria">
+              <PropertyRef Name="IdEmpresaOriginaria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdEmpresaOriginaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUTO_REFERENCE_EMPRESAR">
+          <End Role="EmpresaRevendedora" Type="Self.EmpresaRevendedora" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaRevendedora">
+              <PropertyRef Name="IdEmpresaRevendedora" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdEmpresaRevendedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUTO_REFERENCE_TIPOPROD">
+          <End Role="TipoProduto" Type="Self.TipoProduto" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_REFERENCE_PERFIL">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EletrobidModelStoreContainer">
+          <EntitySet Name="EmpresaOriginaria" EntityType="Self.EmpresaOriginaria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpresaRevendedora" EntityType="Self.EmpresaRevendedora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imposto" EntityType="Self.Imposto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImpostoProduto" EntityType="Self.ImpostoProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoImposto" EntityType="Self.TipoImposto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IMPOSTO_REFERENCE_TIPOIMPO" Association="Self.FK_IMPOSTO_REFERENCE_TIPOIMPO">
+            <End Role="TipoImposto" EntitySet="TipoImposto" />
+            <End Role="Imposto" EntitySet="Imposto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPOSTOP_REFERENCE_IMPOSTO" Association="Self.FK_IMPOSTOP_REFERENCE_IMPOSTO">
+            <End Role="Imposto" EntitySet="Imposto" />
+            <End Role="ImpostoProduto" EntitySet="ImpostoProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPOSTOP_REFERENCE_PRODUTO" Association="Self.FK_IMPOSTOP_REFERENCE_PRODUTO">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="ImpostoProduto" EntitySet="ImpostoProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_EMPRESAO" Association="Self.FK_PRODUTO_REFERENCE_EMPRESAO">
+            <End Role="EmpresaOriginaria" EntitySet="EmpresaOriginaria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_EMPRESAR" Association="Self.FK_PRODUTO_REFERENCE_EMPRESAR">
+            <End Role="EmpresaRevendedora" EntitySet="EmpresaRevendedora" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_TIPOPROD" Association="Self.FK_PRODUTO_REFERENCE_TIPOPROD">
+            <End Role="TipoProduto" EntitySet="TipoProduto" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_REFERENCE_PERFIL" Association="Self.FK_USUARIO_REFERENCE_PERFIL">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EletrobidModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EmpresaOriginaria">
+          <Key>
+            <PropertyRef Name="IdEmpresaOriginaria" />
+          </Key>
+          <Property Name="IdEmpresaOriginaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazaoSocial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomeFantasia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="14" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TelefoneContato1" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefoneContato2" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="MargemLucro" Type="Double" />
+          <Property Name="Endereco" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cep" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Produtoes" Relationship="Self.FK_PRODUTO_REFERENCE_EMPRESAO" FromRole="EmpresaOriginaria" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="EmpresaRevendedora">
+          <Key>
+            <PropertyRef Name="IdEmpresaRevendedora" />
+          </Key>
+          <Property Name="IdEmpresaRevendedora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RazaoSocial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomeFantasia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="14" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TelefoneContato1" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefoneContato2" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="MargemLucro" Type="Double" />
+          <Property Name="Endereco" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cep" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Produtoes" Relationship="Self.FK_PRODUTO_REFERENCE_EMPRESAR" FromRole="EmpresaRevendedora" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Imposto">
+          <Key>
+            <PropertyRef Name="IdImposto" />
+          </Key>
+          <Property Name="IdImposto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdTipoImposto" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="DataInicioCobranca" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TipoImposto" Relationship="Self.FK_IMPOSTO_REFERENCE_TIPOIMPO" FromRole="Imposto" ToRole="TipoImposto" />
+          <NavigationProperty Name="ImpostoProdutoes" Relationship="Self.FK_IMPOSTOP_REFERENCE_IMPOSTO" FromRole="Imposto" ToRole="ImpostoProduto" />
+        </EntityType>
+        <EntityType Name="ImpostoProduto">
+          <Key>
+            <PropertyRef Name="IdImpostoProduto" />
+          </Key>
+          <Property Name="IdImpostoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="IdImposto" Type="Int32" Nullable="false" />
+          <Property Name="ValorPagar" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Imposto" Relationship="Self.FK_IMPOSTOP_REFERENCE_IMPOSTO" FromRole="ImpostoProduto" ToRole="Imposto" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_IMPOSTOP_REFERENCE_PRODUTO" FromRole="ImpostoProduto" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_USUARIO_REFERENCE_PERFIL" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoItem" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
+          <Property Name="ValorTotal" Type="Double" Nullable="false" />
+          <Property Name="IdentificacaoNfe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresaOriginaria" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresaRevendedora" Type="Int32" />
+          <Property Name="DataEntrada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataSaida" Type="DateTime" Precision="3" />
+          <Property Name="DataVenda" Type="DateTime" Precision="3" />
+          <Property Name="ValorUnitarioVenda" Type="Double" />
+          <Property Name="ValorTotalVenda" Type="Double" />
+          <Property Name="CodigoReferenciaVenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoIdentificador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ValorMinimoUnitarioVenda" Type="Double" />
+          <Property Name="Observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacaoVenda" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoProduto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmpresaOriginaria" Relationship="Self.FK_PRODUTO_REFERENCE_EMPRESAO" FromRole="Produto" ToRole="EmpresaOriginaria" />
+          <NavigationProperty Name="EmpresaRevendedora" Relationship="Self.FK_PRODUTO_REFERENCE_EMPRESAR" FromRole="Produto" ToRole="EmpresaRevendedora" />
+          <NavigationProperty Name="ImpostoProdutoes" Relationship="Self.FK_IMPOSTOP_REFERENCE_PRODUTO" FromRole="Produto" ToRole="ImpostoProduto" />
+          <NavigationProperty Name="TipoProduto" Relationship="Self.FK_PRODUTO_REFERENCE_TIPOPROD" FromRole="Produto" ToRole="TipoProduto" />
+        </EntityType>
+        <EntityType Name="TipoImposto">
+          <Key>
+            <PropertyRef Name="IdTipoImposto" />
+          </Key>
+          <Property Name="IdTipoImposto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Impostoes" Relationship="Self.FK_IMPOSTO_REFERENCE_TIPOIMPO" FromRole="TipoImposto" ToRole="Imposto" />
+        </EntityType>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="IdTipoProduto" />
+          </Key>
+          <Property Name="IdTipoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Produtoes" Relationship="Self.FK_PRODUTO_REFERENCE_TIPOPROD" FromRole="TipoProduto" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apelido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK_USUARIO_REFERENCE_PERFIL" FromRole="Usuario" ToRole="Perfil" />
+        </EntityType>
+        <Association Name="FK_PRODUTO_REFERENCE_EMPRESAO">
+          <End Role="EmpresaOriginaria" Type="Self.EmpresaOriginaria" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaOriginaria">
+              <PropertyRef Name="IdEmpresaOriginaria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdEmpresaOriginaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUTO_REFERENCE_EMPRESAR">
+          <End Role="EmpresaRevendedora" Type="Self.EmpresaRevendedora" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaRevendedora">
+              <PropertyRef Name="IdEmpresaRevendedora" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdEmpresaRevendedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPOSTO_REFERENCE_TIPOIMPO">
+          <End Role="TipoImposto" Type="Self.TipoImposto" Multiplicity="1" />
+          <End Role="Imposto" Type="Self.Imposto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoImposto">
+              <PropertyRef Name="IdTipoImposto" />
+            </Principal>
+            <Dependent Role="Imposto">
+              <PropertyRef Name="IdTipoImposto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPOSTOP_REFERENCE_IMPOSTO">
+          <End Role="Imposto" Type="Self.Imposto" Multiplicity="1" />
+          <End Role="ImpostoProduto" Type="Self.ImpostoProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imposto">
+              <PropertyRef Name="IdImposto" />
+            </Principal>
+            <Dependent Role="ImpostoProduto">
+              <PropertyRef Name="IdImposto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPOSTOP_REFERENCE_PRODUTO">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="ImpostoProduto" Type="Self.ImpostoProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="ImpostoProduto">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_REFERENCE_PERFIL">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUTO_REFERENCE_TIPOPROD">
+          <End Role="TipoProduto" Type="Self.TipoProduto" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EletrobidEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmpresaOriginarias" EntityType="Self.EmpresaOriginaria" />
+          <EntitySet Name="EmpresaRevendedoras" EntityType="Self.EmpresaRevendedora" />
+          <EntitySet Name="Impostoes" EntityType="Self.Imposto" />
+          <EntitySet Name="ImpostoProdutoes" EntityType="Self.ImpostoProduto" />
+          <EntitySet Name="Perfils" EntityType="Self.Perfil" />
+          <EntitySet Name="Produtoes" EntityType="Self.Produto" />
+          <EntitySet Name="TipoImpostoes" EntityType="Self.TipoImposto" />
+          <EntitySet Name="TipoProdutoes" EntityType="Self.TipoProduto" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_EMPRESAO" Association="Self.FK_PRODUTO_REFERENCE_EMPRESAO">
+            <End Role="EmpresaOriginaria" EntitySet="EmpresaOriginarias" />
+            <End Role="Produto" EntitySet="Produtoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_EMPRESAR" Association="Self.FK_PRODUTO_REFERENCE_EMPRESAR">
+            <End Role="EmpresaRevendedora" EntitySet="EmpresaRevendedoras" />
+            <End Role="Produto" EntitySet="Produtoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPOSTO_REFERENCE_TIPOIMPO" Association="Self.FK_IMPOSTO_REFERENCE_TIPOIMPO">
+            <End Role="TipoImposto" EntitySet="TipoImpostoes" />
+            <End Role="Imposto" EntitySet="Impostoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPOSTOP_REFERENCE_IMPOSTO" Association="Self.FK_IMPOSTOP_REFERENCE_IMPOSTO">
+            <End Role="Imposto" EntitySet="Impostoes" />
+            <End Role="ImpostoProduto" EntitySet="ImpostoProdutoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPOSTOP_REFERENCE_PRODUTO" Association="Self.FK_IMPOSTOP_REFERENCE_PRODUTO">
+            <End Role="Produto" EntitySet="Produtoes" />
+            <End Role="ImpostoProduto" EntitySet="ImpostoProdutoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_REFERENCE_PERFIL" Association="Self.FK_USUARIO_REFERENCE_PERFIL">
+            <End Role="Perfil" EntitySet="Perfils" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUTO_REFERENCE_TIPOPROD" Association="Self.FK_PRODUTO_REFERENCE_TIPOPROD">
+            <End Role="TipoProduto" EntitySet="TipoProdutoes" />
+            <End Role="Produto" EntitySet="Produtoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EletrobidModelStoreContainer" CdmEntityContainer="EletrobidEntities">
+          <EntitySetMapping Name="EmpresaOriginarias">
+            <EntityTypeMapping TypeName="EletrobidModel.EmpresaOriginaria">
+              <MappingFragment StoreEntitySet="EmpresaOriginaria">
+                <ScalarProperty Name="IdEmpresaOriginaria" ColumnName="IdEmpresaOriginaria" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+                <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="TelefoneContato1" ColumnName="TelefoneContato1" />
+                <ScalarProperty Name="TelefoneContato2" ColumnName="TelefoneContato2" />
+                <ScalarProperty Name="MargemLucro" ColumnName="MargemLucro" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpresaRevendedoras">
+            <EntityTypeMapping TypeName="EletrobidModel.EmpresaRevendedora">
+              <MappingFragment StoreEntitySet="EmpresaRevendedora">
+                <ScalarProperty Name="IdEmpresaRevendedora" ColumnName="IdEmpresaRevendedora" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+                <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="TelefoneContato1" ColumnName="TelefoneContato1" />
+                <ScalarProperty Name="TelefoneContato2" ColumnName="TelefoneContato2" />
+                <ScalarProperty Name="MargemLucro" ColumnName="MargemLucro" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Impostoes">
+            <EntityTypeMapping TypeName="EletrobidModel.Imposto">
+              <MappingFragment StoreEntitySet="Imposto">
+                <ScalarProperty Name="IdImposto" ColumnName="IdImposto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="IdTipoImposto" ColumnName="IdTipoImposto" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DataInicioCobranca" ColumnName="DataInicioCobranca" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImpostoProdutoes">
+            <EntityTypeMapping TypeName="EletrobidModel.ImpostoProduto">
+              <MappingFragment StoreEntitySet="ImpostoProduto">
+                <ScalarProperty Name="IdImpostoProduto" ColumnName="IdImpostoProduto" />
+                <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+                <ScalarProperty Name="IdImposto" ColumnName="IdImposto" />
+                <ScalarProperty Name="ValorPagar" ColumnName="ValorPagar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfils">
+            <EntityTypeMapping TypeName="EletrobidModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produtoes">
+            <EntityTypeMapping TypeName="EletrobidModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="CodigoItem" ColumnName="CodigoItem" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="IdentificacaoNfe" ColumnName="IdentificacaoNfe" />
+                <ScalarProperty Name="IdEmpresaOriginaria" ColumnName="IdEmpresaOriginaria" />
+                <ScalarProperty Name="IdEmpresaRevendedora" ColumnName="IdEmpresaRevendedora" />
+                <ScalarProperty Name="DataEntrada" ColumnName="DataEntrada" />
+                <ScalarProperty Name="DataSaida" ColumnName="DataSaida" />
+                <ScalarProperty Name="DataVenda" ColumnName="DataVenda" />
+                <ScalarProperty Name="ValorUnitarioVenda" ColumnName="ValorUnitarioVenda" />
+                <ScalarProperty Name="ValorTotalVenda" ColumnName="ValorTotalVenda" />
+                <ScalarProperty Name="CodigoReferenciaVenda" ColumnName="CodigoReferenciaVenda" />
+                <ScalarProperty Name="CodigoIdentificador" ColumnName="CodigoIdentificador" />
+                <ScalarProperty Name="ValorMinimoUnitarioVenda" ColumnName="ValorMinimoUnitarioVenda" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="ObservacaoVenda" ColumnName="ObservacaoVenda" />
+                <ScalarProperty Name="IdTipoProduto" ColumnName="IdTipoProduto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoImpostoes">
+            <EntityTypeMapping TypeName="EletrobidModel.TipoImposto">
+              <MappingFragment StoreEntitySet="TipoImposto">
+                <ScalarProperty Name="IdTipoImposto" ColumnName="IdTipoImposto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProdutoes">
+            <EntityTypeMapping TypeName="EletrobidModel.TipoProduto">
+              <MappingFragment StoreEntitySet="TipoProduto">
+                <ScalarProperty Name="IdTipoProduto" ColumnName="IdTipoProduto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="EletrobidModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Apelido" ColumnName="Apelido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

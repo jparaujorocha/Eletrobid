@@ -12,15 +12,15 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class Usuario
     {
-        public int IDUSUARIO { get; set; }
-        public string NOME { get; set; }
-        public string APELIDO { get; set; }
-        public string EMAIL { get; set; }
-        public string SENHA { get; set; }
-        public int IDPERFIL { get; set; }
+        public int IdUsuario { get; set; }
+        public string Nome { get; set; }
+        public string Apelido { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public int IdPerfil { get; set; }
     
-        public virtual PERFIL PERFIL { get; set; }
+        public virtual Perfil Perfil { get; set; }
     }
 }

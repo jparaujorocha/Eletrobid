@@ -12,14 +12,14 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IMPOSTOPRODUTO
+    public partial class ImpostoProduto
     {
-        public int IDIMPOSTOPRODUTO { get; set; }
-        public int IDPRODUTO { get; set; }
-        public int IDIMPOSTO { get; set; }
-        public double VALORPAGAR { get; set; }
+        public int IdImpostoProduto { get; set; }
+        public int IdProduto { get; set; }
+        public int IdImposto { get; set; }
+        public double ValorPagar { get; set; }
     
-        public virtual IMPOSTO IMPOSTO { get; set; }
-        public virtual PRODUTO PRODUTO { get; set; }
+        public virtual Imposto Imposto { get; set; }
+        public virtual Produto Produto { get; set; }
     }
 }

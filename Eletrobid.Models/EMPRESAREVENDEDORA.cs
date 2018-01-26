@@ -12,25 +12,25 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EMPRESAREVENDEDORA
+    public partial class EmpresaRevendedora
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EMPRESAREVENDEDORA()
+        public EmpresaRevendedora()
         {
-            this.PRODUTOes = new HashSet<PRODUTO>();
+            this.Produtoes = new HashSet<Produto>();
         }
     
-        public int IDEMPRESAREVENDEDORA { get; set; }
-        public string RAZAOSOCIAL { get; set; }
-        public string NOMEFANTASIA { get; set; }
-        public string CNPJ { get; set; }
-        public string TELEFONECONTATO1 { get; set; }
-        public string TELEFONECONTATO2 { get; set; }
-        public Nullable<double> MARGEMLUCRO { get; set; }
-        public string ENDERECO { get; set; }
-        public string CEP { get; set; }
+        public int IdEmpresaRevendedora { get; set; }
+        public string RazaoSocial { get; set; }
+        public string NomeFantasia { get; set; }
+        public string Cnpj { get; set; }
+        public string TelefoneContato1 { get; set; }
+        public string TelefoneContato2 { get; set; }
+        public Nullable<double> MargemLucro { get; set; }
+        public string Endereco { get; set; }
+        public string Cep { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUTO> PRODUTOes { get; set; }
+        public virtual ICollection<Produto> Produtoes { get; set; }
     }
 }

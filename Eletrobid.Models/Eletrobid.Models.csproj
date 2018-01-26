@@ -51,60 +51,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Banco Eletrobid.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Banco Eletrobid.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Banco Eletrobid.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Banco Eletrobid.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Banco Eletrobid.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Class1.cs" />
-    <Compile Include="EMPRESAORIGINARIA.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Eletrobid.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eletrobid.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EMPRESAREVENDEDORA.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Eletrobid.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="IMPOSTO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Eletrobid.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eletrobid.edmx</DependentUpon>
     </Compile>
-    <Compile Include="IMPOSTOPRODUTO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="EmpresaOriginaria.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpresaRevendedora.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imposto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImpostoProduto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Partial\EmpresaOriginaria.cs" />
+    <Compile Include="Partial\EmpresaRevendedora.cs" />
     <Compile Include="Partial\Imposto.cs" />
-    <Compile Include="PERFIL.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Partial\ImpostoProduto.cs" />
+    <Compile Include="Partial\Perfil.cs" />
+    <Compile Include="Partial\Produto.cs" />
+    <Compile Include="Partial\TipoImposto.cs" />
+    <Compile Include="Partial\TipoProduto.cs" />
+    <Compile Include="Partial\Usuario.cs" />
+    <Compile Include="Perfil.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="PRODUTO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Produto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TIPOIMPOSTO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="TipoImposto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="TIPOPRODUTO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="TipoProduto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="USUARIO.cs">
-      <DependentUpon>Banco Eletrobid.tt</DependentUpon>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <EntityDeploy Include="Banco Eletrobid.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Eletrobid.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Banco Eletrobid.Designer.cs</LastGenOutput>
+      <LastGenOutput>Eletrobid.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Banco Eletrobid.edmx.diagram">
-      <DependentUpon>Banco Eletrobid.edmx</DependentUpon>
+    <None Include="Eletrobid.edmx.diagram">
+      <DependentUpon>Eletrobid.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -112,15 +122,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Banco Eletrobid.Context.tt">
+    <Content Include="Eletrobid.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Banco Eletrobid.edmx</DependentUpon>
-      <LastGenOutput>Banco Eletrobid.Context.cs</LastGenOutput>
+      <DependentUpon>Eletrobid.edmx</DependentUpon>
+      <LastGenOutput>Eletrobid.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Banco Eletrobid.tt">
+    <Content Include="Eletrobid.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Banco Eletrobid.edmx</DependentUpon>
-      <LastGenOutput>Banco Eletrobid.cs</LastGenOutput>
+      <DependentUpon>Eletrobid.edmx</DependentUpon>
+      <LastGenOutput>Eletrobid.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
