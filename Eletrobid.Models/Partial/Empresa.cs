@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Eletrobid.Models.Partial
 {
-    [MetadataType(typeof(EmpresaRevendedoraMetadata))]
-
-    public partial class EmpresaRevendedora
+    [MetadataType(typeof(EmpresaMetadata))]
+    public partial class Empresa
     {
 
     }
 
-    public class EmpresaRevendedoraMetadata
+    public class EmpresaMetadata
     {
         [Display(Name = "Identificação")]
         public int IdEmpresaRevendedora { get; }
@@ -43,5 +42,10 @@ namespace Eletrobid.Models.Partial
         [Display(Name = "CEP"), Required(ErrorMessage = "CEP obrigatório"), StringLength(9, MinimumLength = 8)]
         public string Cep { get; set; }
 
+        [Display(Name = "Empresa Leiloeira"), Required(ErrorMessage = "Campo obrigatório")]
+        public bool EmpresaLeiloeira { get; set; }
+
+        [Display(Name = "Tipo de Empresa"), Required(ErrorMessage = "Campo obrigatório")]
+        public int IdTipoEmpresa { get; set; }
     }
 }

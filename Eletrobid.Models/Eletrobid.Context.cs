@@ -25,14 +25,16 @@ namespace Eletrobid.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<EmpresaOriginaria> EmpresaOriginarias { get; set; }
-        public virtual DbSet<EmpresaRevendedora> EmpresaRevendedoras { get; set; }
-        public virtual DbSet<Imposto> Impostoes { get; set; }
-        public virtual DbSet<ImpostoProduto> ImpostoProdutoes { get; set; }
-        public virtual DbSet<Perfil> Perfils { get; set; }
-        public virtual DbSet<Produto> Produtoes { get; set; }
-        public virtual DbSet<TipoImposto> TipoImpostoes { get; set; }
-        public virtual DbSet<TipoProduto> TipoProdutoes { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Imposto> Imposto { get; set; }
+        public virtual DbSet<ImpostoProduto> ImpostoProduto { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
+        public virtual DbSet<Produto> Produto { get; set; }
+        public virtual DbSet<ProdutoLote> ProdutoLote { get; set; }
+        public virtual DbSet<TipoEmpresa> TipoEmpresa { get; set; }
+        public virtual DbSet<TipoImposto> TipoImposto { get; set; }
+        public virtual DbSet<TipoProduto> TipoProduto { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Venda> Venda { get; set; }
     }
 }

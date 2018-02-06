@@ -17,7 +17,7 @@ namespace Eletrobid.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Imposto()
         {
-            this.ImpostoProdutoes = new HashSet<ImpostoProduto>();
+            this.ImpostoProduto = new HashSet<ImpostoProduto>();
         }
     
         public int IdImposto { get; set; }
@@ -29,6 +29,6 @@ namespace Eletrobid.Models
     
         public virtual TipoImposto TipoImposto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImpostoProduto> ImpostoProdutoes { get; set; }
+        public virtual ICollection<ImpostoProduto> ImpostoProduto { get; set; }
     }
 }

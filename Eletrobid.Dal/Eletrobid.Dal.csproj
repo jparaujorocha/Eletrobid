@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,8 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +52,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IEmpresaDal.cs" />
     <Compile Include="Abstract\IImpostoDal.cs" />
+    <Compile Include="Abstract\IImpostoProdutoDal.cs" />
+    <Compile Include="Abstract\IPerfilDal.cs" />
+    <Compile Include="Abstract\IProdutoDal.cs" />
+    <Compile Include="Abstract\IProdutoLoteDal.cs" />
+    <Compile Include="Abstract\ITipoProdutoDal.cs" />
+    <Compile Include="Abstract\IUsuarioDal.cs" />
+    <Compile Include="Abstract\IVendaDal.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Concrete\EmpresaDal.cs" />
+    <Compile Include="Concrete\ImpostoDal.cs" />
+    <Compile Include="Concrete\ImpostoProdutoDal.cs" />
+    <Compile Include="Concrete\PerfilDal.cs" />
+    <Compile Include="Concrete\ProdutoDal.cs" />
+    <Compile Include="Concrete\ProdutoLoteDal.cs" />
+    <Compile Include="Concrete\TipoProdutoDal.cs" />
+    <Compile Include="Concrete\UsuarioDal.cs" />
+    <Compile Include="Concrete\VendaDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Concrete\" />
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eletrobid.Models\Eletrobid.Models.csproj">
+      <Project>{BF82670E-5606-4440-BBB9-DE60741A6DE5}</Project>
+      <Name>Eletrobid.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -67,10 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Eletrobid.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EmpresaOriginaria.cs">
-      <DependentUpon>Eletrobid.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmpresaRevendedora.cs">
+    <Compile Include="Empresa.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="Imposto.cs">
@@ -79,8 +78,7 @@
     <Compile Include="ImpostoProduto.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="Partial\EmpresaOriginaria.cs" />
-    <Compile Include="Partial\EmpresaRevendedora.cs" />
+    <Compile Include="Partial\Empresa.cs" />
     <Compile Include="Partial\Imposto.cs" />
     <Compile Include="Partial\ImpostoProduto.cs" />
     <Compile Include="Partial\Perfil.cs" />
@@ -94,7 +92,13 @@
     <Compile Include="Produto.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProdutoLote.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoEmpresa.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
     <Compile Include="TipoImposto.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
@@ -102,6 +106,9 @@
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Venda.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
   </ItemGroup>

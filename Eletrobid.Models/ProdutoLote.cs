@@ -12,16 +12,16 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class ProdutoLote
     {
-        public int IdUsuario { get; set; }
-        public string Nome { get; set; }
-        public string Apelido { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public int IdPerfil { get; set; }
-        public bool Ativo { get; set; }
+        public int IdProdutoLote { get; set; }
+        public int IdProduto { get; set; }
+        public int NumeroLote { get; set; }
+        public int QuantidadeProduto { get; set; }
+        public double ValorMinimoUniVenda { get; set; }
+        public int IdEmpresaRevendedora { get; set; }
     
-        public virtual Perfil Perfil { get; set; }
+        public virtual Empresa Empresa { get; set; }
+        public virtual Produto Produto { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace Eletrobid.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TipoProduto()
         {
-            this.Produtoes = new HashSet<Produto>();
+            this.Produto = new HashSet<Produto>();
         }
     
         public int IdTipoProduto { get; set; }
         public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Produto> Produtoes { get; set; }
+        public virtual ICollection<Produto> Produto { get; set; }
     }
 }

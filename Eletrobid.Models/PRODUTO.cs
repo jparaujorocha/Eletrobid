@@ -17,7 +17,9 @@ namespace Eletrobid.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produto()
         {
-            this.ImpostoProdutoes = new HashSet<ImpostoProduto>();
+            this.ImpostoProduto = new HashSet<ImpostoProduto>();
+            this.ProdutoLote = new HashSet<ProdutoLote>();
+            this.Venda = new HashSet<Venda>();
         }
     
         public int IdProduto { get; set; }
@@ -28,24 +30,26 @@ namespace Eletrobid.Models
         public int Quantidade { get; set; }
         public double ValorTotal { get; set; }
         public string IdentificacaoNfe { get; set; }
-        public int IdEmpresaOriginaria { get; set; }
+        public int IdEmpresaFornecedora { get; set; }
         public Nullable<int> IdEmpresaRevendedora { get; set; }
         public System.DateTime DataEntrada { get; set; }
         public Nullable<System.DateTime> DataSaida { get; set; }
-        public Nullable<System.DateTime> DataVenda { get; set; }
-        public Nullable<double> ValorUnitarioVenda { get; set; }
-        public Nullable<double> ValorTotalVenda { get; set; }
-        public string CodigoReferenciaVenda { get; set; }
         public string CodigoIdentificador { get; set; }
         public Nullable<double> ValorMinimoUnitarioVenda { get; set; }
         public string Observacao { get; set; }
-        public string ObservacaoVenda { get; set; }
         public int IdTipoProduto { get; set; }
+        public Nullable<int> LoteProduto { get; set; }
     
-        public virtual EmpresaOriginaria EmpresaOriginaria { get; set; }
-        public virtual EmpresaRevendedora EmpresaRevendedora { get; set; }
+        public virtual Empresa Empresa { get; set; }
+        public virtual Empresa Empresa1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImpostoProduto> ImpostoProdutoes { get; set; }
+        public virtual ICollection<ImpostoProduto> ImpostoProduto { get; set; }
+        public virtual Produto Produto1 { get; set; }
+        public virtual Produto Produto2 { get; set; }
         public virtual TipoProduto TipoProduto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProdutoLote> ProdutoLote { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Venda> Venda { get; set; }
     }
 }

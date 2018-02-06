@@ -4,23 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b96c89d6cb734a2ea6239a3b84edc105" Name="Diagram1">
-        <EntityTypeShape EntityType="EletrobidModel.EmpresaOriginaria" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.EmpresaRevendedora" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.Imposto" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.ImpostoProduto" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.Perfil" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.Produto" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.TipoImposto" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.TipoProduto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EletrobidModel.Usuario" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
-        <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_EMPRESAO" ManuallyRouted="false" />
-        <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_EMPRESAR" ManuallyRouted="false" />
+      <Diagram DiagramId="705225abd56540909e49ac7b516ce9e1" Name="Diagram1">
+        <EntityTypeShape EntityType="EletrobidModel.Empresa" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Imposto" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.ImpostoProduto" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Perfil" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Produto" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.ProdutoLote" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoEmpresa" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoImposto" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoProduto" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Usuario" Width="1.5" PointX="10" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EletrobidModel.Venda" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EletrobidModel.FK_Empresa_TipoEmpresa" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Produto_EmpresaFornecedora" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Produto_EmpresaRevendedora" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_ProdutoLote_EmpresaRevendedora" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Venda_EmpresaRevendedora" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_IMPOSTO_REFERENCE_TIPOIMPO" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_IMPOSTOP_REFERENCE_IMPOSTO" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_IMPOSTOP_REFERENCE_PRODUTO" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_USUARIO_REFERENCE_PERFIL" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Produto_Produto" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_TIPOPROD" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_ProdutoLote_Produto" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Venda_Produto" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

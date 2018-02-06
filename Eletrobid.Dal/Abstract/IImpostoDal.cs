@@ -1,12 +1,23 @@
-﻿using System;
+﻿using Eletrobid.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eletrobid.Dal
 {
-    interface IImpostoDal : IDisposable
+    public interface IImpostoDal : IDisposable
     {
+        Imposto GetImposto(int idImposto);
+
+        Imposto InsereImposto(Imposto dadosImposto);
+
+        Imposto EditaImposto(Imposto dadosImposto);
+
+        void ExcluiImposto(int idImposto);
+
+        IEnumerable<Imposto> ListaImpostos();
+
+        IEnumerable<Imposto> ListaImpostos(int idTipoImposto);
+
+        IEnumerable<Imposto> ListaImpostos(DateTime DataInicioCobranca);
     }
 }
