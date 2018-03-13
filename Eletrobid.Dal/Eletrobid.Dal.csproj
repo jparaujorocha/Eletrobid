@@ -73,19 +73,18 @@
     <Compile Include="Concrete\VendaDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Eletrobid.Models\Eletrobid.Models.csproj">
+      <Project>{bf82670e-5606-4440-bbb9-de60741a6de5}</Project>
+      <Name>Eletrobid.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Eletrobid.Models\Eletrobid.Models.csproj">
-      <Project>{BF82670E-5606-4440-BBB9-DE60741A6DE5}</Project>
-      <Name>Eletrobid.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

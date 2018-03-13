@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Eletrobid.Models.Produto>
+
+@{
+    ViewBag.Title = "Gerencia de Produtos";
+}
+
+<h2 class="text-center">Produtos</h2>
+
+<p class="float-right">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-responsive-xl text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentificacaoNfe)
+            </th>
+            <th>
+                Origem
+            </th>
+            <th>
+                Revendedora
+            </th>
+            <th>
+                Data Entrada
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorMinimoUnitarioVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoProduto)
+            </th>
+            <th>
+                Lote do Produto
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacaoNfe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmpresaFornecedora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmpresaRevendedora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEntrada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMinimoUnitarioVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoteProduto)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
