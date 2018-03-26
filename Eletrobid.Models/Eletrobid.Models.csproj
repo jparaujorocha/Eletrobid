@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Nfe.cs" />
     <Compile Include="Eletrobid.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
