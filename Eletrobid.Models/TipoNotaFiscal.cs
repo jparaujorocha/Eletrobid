@@ -12,18 +12,18 @@ namespace Eletrobid.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Nfe
+    public partial class TipoNotaFiscal
     {
-        public int IdNfe { get; set; }
-        public int NumeroNota { get; set; }
-        public string DestinatarioNota { get; set; }
-        public string ChaveAcesso { get; set; }
-        public System.DateTime DataEmissao { get; set; }
-        public double Valor { get; set; }
-        public string CpfDestinatario { get; set; }
-        public string CnpjDestinatario { get; set; }
-        public int IdTipoNotaFiscal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoNotaFiscal()
+        {
+            this.Nfe = new HashSet<Nfe>();
+        }
     
-        public virtual TipoNotaFiscal TipoNotaFiscal { get; set; }
+        public int IdTipoNotaFiscal { get; set; }
+        public string Nome { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Nfe> Nfe { get; set; }
     }
 }

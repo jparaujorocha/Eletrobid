@@ -52,9 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICidadeDal.cs" />
     <Compile Include="Abstract\IEmpresaDal.cs" />
+    <Compile Include="Abstract\IEstadoDal.cs" />
     <Compile Include="Abstract\IImpostoDal.cs" />
     <Compile Include="Abstract\IImpostoProdutoDal.cs" />
+    <Compile Include="Abstract\INfeDal.cs" />
     <Compile Include="Abstract\IPerfilDal.cs" />
     <Compile Include="Abstract\IProdutoDal.cs" />
     <Compile Include="Abstract\IProdutoLoteDal.cs" />
@@ -62,9 +65,12 @@
     <Compile Include="Abstract\IUsuarioDal.cs" />
     <Compile Include="Abstract\IVendaDal.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Concrete\CidadeDal.cs" />
     <Compile Include="Concrete\EmpresaDal.cs" />
+    <Compile Include="Concrete\EstadoDal.cs" />
     <Compile Include="Concrete\ImpostoDal.cs" />
     <Compile Include="Concrete\ImpostoProdutoDal.cs" />
+    <Compile Include="Concrete\NfeDal.cs" />
     <Compile Include="Concrete\PerfilDal.cs" />
     <Compile Include="Concrete\ProdutoDal.cs" />
     <Compile Include="Concrete\ProdutoLoteDal.cs" />

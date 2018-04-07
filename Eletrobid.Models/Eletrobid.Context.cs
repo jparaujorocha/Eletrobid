@@ -36,5 +36,9 @@ namespace Eletrobid.Models
         public virtual DbSet<TipoProduto> TipoProduto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Venda> Venda { get; set; }
+        public virtual DbSet<Cidade> Cidade { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<Nfe> Nfe { get; set; }
+        public virtual DbSet<TipoNotaFiscal> TipoNotaFiscal { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eletrobid.Models.Partial
+namespace Eletrobid.Models
 {
     [MetadataType(typeof(UsuarioMetadata))]
     public partial class Usuario

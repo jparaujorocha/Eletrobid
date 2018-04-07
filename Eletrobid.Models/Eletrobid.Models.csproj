@@ -53,7 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Nfe.cs" />
+    <Compile Include="Cidade.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estado.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Nfe.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
     <Compile Include="Eletrobid.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,12 +87,16 @@
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="LoggedUser.cs" />
+    <Compile Include="Partial\Cidade.cs" />
     <Compile Include="Partial\Empresa.cs" />
+    <Compile Include="Partial\Estado.cs" />
     <Compile Include="Partial\Imposto.cs" />
     <Compile Include="Partial\ImpostoProduto.cs" />
+    <Compile Include="Partial\Nfe.cs" />
     <Compile Include="Partial\Perfil.cs" />
     <Compile Include="Partial\Produto.cs" />
     <Compile Include="Partial\TipoImposto.cs" />
+    <Compile Include="Partial\TipoNotaFiscal.cs" />
     <Compile Include="Partial\TipoProduto.cs" />
     <Compile Include="Partial\Usuario.cs" />
     <Compile Include="Perfil.cs">
@@ -101,6 +113,9 @@
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoImposto.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoNotaFiscal.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoProduto.cs">

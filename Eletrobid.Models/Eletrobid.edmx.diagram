@@ -29,6 +29,12 @@
         <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_TIPOPROD" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_ProdutoLote_Produto" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_Venda_Produto" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EletrobidModel.Cidade" Width="1.5" PointX="9.625" PointY="12.875" />
+        <EntityTypeShape EntityType="EletrobidModel.Estado" Width="1.5" PointX="7.375" PointY="13" />
+        <EntityTypeShape EntityType="EletrobidModel.Nfe" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="EletrobidModel.TipoNotaFiscal" Width="1.5" PointX="10.375" PointY="1.625" />
+        <AssociationConnector Association="EletrobidModel.FK_Cidade_Estado" />
+        <AssociationConnector Association="EletrobidModel.FK_Nfe_TipoNotaFiscal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
