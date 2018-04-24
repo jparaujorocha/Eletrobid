@@ -124,6 +124,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validations\Util.cs" />
     <Compile Include="Venda.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
