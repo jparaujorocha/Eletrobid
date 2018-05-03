@@ -92,7 +92,6 @@
           <Property Name="Quantidade" Type="int" Nullable="false" />
           <Property Name="IdEmpresaFornecedora" Type="int" Nullable="false" />
           <Property Name="CodigoIdentificador" Type="varchar(max)" />
-          <Property Name="Observacao" Type="varchar" MaxLength="255" />
           <Property Name="IdTipoProduto" Type="int" Nullable="false" />
           <Property Name="LoteProduto" Type="int" />
         </EntityType>
@@ -509,7 +508,6 @@
           <Property Name="Quantidade" Type="Int32" Nullable="false" />
           <Property Name="IdEmpresaFornecedora" Type="Int32" Nullable="false" />
           <Property Name="CodigoIdentificador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoProduto" Type="Int32" Nullable="false" />
           <Property Name="LoteProduto" Type="Int32" />
           <NavigationProperty Name="Empresa" Relationship="Self.FK_Produto_EmpresaFornecedora" FromRole="Produto" ToRole="Empresa" />
@@ -938,7 +936,6 @@
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
                 <ScalarProperty Name="IdEmpresaFornecedora" ColumnName="IdEmpresaFornecedora" />
                 <ScalarProperty Name="CodigoIdentificador" ColumnName="CodigoIdentificador" />
-                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="IdTipoProduto" ColumnName="IdTipoProduto" />
                 <ScalarProperty Name="LoteProduto" ColumnName="LoteProduto" />
               </MappingFragment>

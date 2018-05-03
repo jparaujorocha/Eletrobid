@@ -29,7 +29,6 @@ namespace Eletrobid.Models
         public int Quantidade { get; set; }
         public int IdEmpresaFornecedora { get; set; }
         public string CodigoIdentificador { get; set; }
-        public string Observacao { get; set; }
         public int IdTipoProduto { get; set; }
         public Nullable<int> LoteProduto { get; set; }
     
