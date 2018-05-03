@@ -20,44 +20,26 @@ namespace Eletrobid.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        [Display(Name ="Código"), Required(ErrorMessage ="Código Obrigatório")]
+        [Display(Name ="Código"), Required(ErrorMessage ="Código do Produto Obrigatório")]
         public string CodigoItem { get; set; }
 
-        [Display(Name ="Valor Unitário"),Required(ErrorMessage ="Valor Unitário Obrigatório")]
-        public float ValorUnitario { get; set; }
-
-        [Display(Name ="Quantidade"),Required(ErrorMessage ="Quantidade Obrigatória")]
+        [Display(Name ="Quantidade"),Required(ErrorMessage ="Quantidade do Produto Obrigatória")]
         public int Quantidade { get; set; }
-
-        [Display(Name = "Valor Total"), Required(ErrorMessage = "Valor Total Obrigatório")]
-        public float ValorTotal { get; set; }
-
-        [Display(Name ="Identificação da NFe")]
-        public string IdentificacaoNfe { get; set; }
-
-        [Display(Name = "Identificação da Empresa Fornecedora"), Required(ErrorMessage = "Campo Obrigatório")]
+        
+        [Display(Name = "Empresa Fornecedora"), Required(ErrorMessage = "Informe a empresa")]
         public int IdEmpresaFornecedora { get; set; }
-
-        [Display(Name = "Identificação da Empresa Revendedora"), Required(ErrorMessage = "Campo Obrigatório")]
-        public int IdEmpresaRevendedora { get; set; }
-
-        [Display(Name = "Data de Entrada"), Required(ErrorMessage = "Data de Entrada Obrigatória")]
-        public DateTime DataEntrada { get; set; }
-
-        [Display(Name = "Data de Saída")]
-        public DateTime DataSaida { get; set; }
 
         [Display(Name = "Código Identificador do Produto")]
         public string CodigoIdentificador { get; set; }
-
-        [Display(Name = "Valor Minímo")]
-        public float ValorMinimoUnitarioVenda { get; set; }
         
-        [Display(Name = "Observação Sobre o Produto")]
+        [Display(Name = "Observação")]
         public string Observacao { get; set; }
 
-        [Display(Name ="Tipo do Produto")]
+        [Display(Name = "Tipo do Produto")]
         public int IdTipoProduto { get; set; }
+
+        [Display(Name = "Lote do Produto")]
+        public int? LoteProduto { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace Eletrobid.Controllers
         private readonly ITipoProdutoDal _tipoProduto;
         private readonly IVendaDal _vendaDal;
 
-        public ProdutoController(IProdutoDal produtoDal,IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal)
+        public ProdutoController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal)
         {
             _produtoDal = produtoDal;
             _impostoDal = impostoDal;
@@ -25,7 +25,6 @@ namespace Eletrobid.Controllers
             _vendaDal = vendaDal;
         }
 
-        // GET: Produto
         public ActionResult Index()
         {
             return View();
@@ -38,5 +37,33 @@ namespace Eletrobid.Controllers
             var produtos = _produtoDal.ListaProdutos();
             return View(produtos);
         }
+
+        public ActionResult InserirProduto()
+        {
+            Produto dadosProduto = new Produto();
+            return View(dadosProduto);
+        }
+
+        [HttpPost]
+        public ActionResult InserirProduto(Produto dadosProduto)
+        {
+            var produtos = _produtoDal.ListaProdutos();
+            return View(produtos);
+        }
+
+        public ActionResult InserirProdutos()
+        {
+            var produtos = _produtoDal.ListaProdutos();
+            return View(produtos);
+        }
+
+        [HttpPost]
+        public ActionResult InserirProdutos(Produto dadosProduto)
+        {
+            var produtos = _produtoDal.ListaProdutos();
+            return View(produtos);
+        }
+
+
     }
 }

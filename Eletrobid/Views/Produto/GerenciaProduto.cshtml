@@ -19,40 +19,13 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodigoItem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorUnitario)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentificacaoNfe)
             </th>
             <th>
                 Origem
             </th>
             <th>
-                Revendedora
-            </th>
-            <th>
-                Data Entrada
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorMinimoUnitarioVenda)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.IdTipoProduto)
-            </th>
-            <th>
-                Lote do Produto
             </th>
             <th></th>
         </tr>
@@ -68,40 +41,13 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoItem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorUnitario)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorTotal)
+                @Html.DisplayFor(modelItem => item.Empresa.NomeFantasia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentificacaoNfe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdEmpresaFornecedora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdEmpresaRevendedora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEntrada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorMinimoUnitarioVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTipoProduto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoteProduto)
+                @Html.DisplayFor(modelItem => item.TipoProduto.Nome)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

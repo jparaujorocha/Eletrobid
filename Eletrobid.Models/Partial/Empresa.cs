@@ -15,9 +15,6 @@ namespace Eletrobid.Models
 
     public class EmpresaMetadata
     {
-        [Display(Name = "Identificação")]
-        public int IdEmpresaRevendedora { get; }
-
         [Display(Name = "Razão Social"), Required(ErrorMessage = "Razão Social Obrigatória"), StringLength(255, MinimumLength = 10)]
         public string RazaoSocial { get; set; }
 

@@ -83,12 +83,7 @@ namespace Eletrobid.Dal
         {
             return (from c in _dbContext.Produto where c.LoteProduto == loteProduto select c).ToList();
         }
-
-        public IEnumerable<Produto> ListaProdutosRevendedor(int idEmpresaRevendedora)
-        {
-            return (from c in _dbContext.Produto where c.IdEmpresaRevendedora == idEmpresaRevendedora select c).ToList();
-        }
-
+        
         public IEnumerable<Produto> ListaProdutosTipoProduto(int idTipoProduto)
         {
             return (from c in _dbContext.Produto where c.IdTipoProduto == idTipoProduto select c).ToList();

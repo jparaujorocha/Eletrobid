@@ -89,16 +89,9 @@
           <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="255" />
           <Property Name="CodigoItem" Type="varchar(max)" Nullable="false" />
-          <Property Name="ValorUnitario" Type="float" Nullable="false" />
           <Property Name="Quantidade" Type="int" Nullable="false" />
-          <Property Name="ValorTotal" Type="float" Nullable="false" />
-          <Property Name="IdentificacaoNfe" Type="varchar(max)" />
           <Property Name="IdEmpresaFornecedora" Type="int" Nullable="false" />
-          <Property Name="IdEmpresaRevendedora" Type="int" />
-          <Property Name="DataEntrada" Type="datetime" Nullable="false" />
-          <Property Name="DataSaida" Type="datetime" />
           <Property Name="CodigoIdentificador" Type="varchar(max)" />
-          <Property Name="ValorMinimoUnitarioVenda" Type="float" />
           <Property Name="Observacao" Type="varchar" MaxLength="255" />
           <Property Name="IdTipoProduto" Type="int" Nullable="false" />
           <Property Name="LoteProduto" Type="int" />
@@ -256,18 +249,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Produto_EmpresaRevendedora">
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
-          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="Produto">
-              <PropertyRef Name="IdEmpresaRevendedora" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Produto_Produto">
           <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
           <End Role="Produto1" Type="Self.Produto" Multiplicity="0..1" />
@@ -396,10 +377,6 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Produto_EmpresaRevendedora" Association="Self.FK_Produto_EmpresaRevendedora">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="Produto" EntitySet="Produto" />
-          </AssociationSet>
           <AssociationSet Name="FK_Produto_Produto" Association="Self.FK_Produto_Produto">
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Produto1" EntitySet="Produto" />
@@ -433,6 +410,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EletrobidModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="CidadeId" />
+          </Key>
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoId" Type="Byte" />
+          <Property Name="Capital" Type="Boolean" Nullable="false" />
+          <Property Name="CodigoIbge" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK_Cidade_Estado" FromRole="Cidade" ToRole="Estado" />
+        </EntityType>
         <EntityType Name="Empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -450,9 +438,18 @@
           <Property Name="IdTipoEmpresa" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TipoEmpresa" Relationship="Self.FK_Empresa_TipoEmpresa" FromRole="Empresa" ToRole="TipoEmpresa" />
           <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_EmpresaFornecedora" FromRole="Empresa" ToRole="Produto" />
-          <NavigationProperty Name="Produto1" Relationship="Self.FK_Produto_EmpresaRevendedora" FromRole="Empresa" ToRole="Produto" />
           <NavigationProperty Name="ProdutoLote" Relationship="Self.FK_ProdutoLote_EmpresaRevendedora" FromRole="Empresa" ToRole="ProdutoLote" />
           <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_EmpresaRevendedora" FromRole="Empresa" ToRole="Venda" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="EstadoId" />
+          </Key>
+          <Property Name="EstadoId" Type="Byte" Nullable="false" />
+          <Property Name="Sigla" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoIbge" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
         </EntityType>
         <EntityType Name="Imposto">
           <Key>
@@ -478,6 +475,21 @@
           <NavigationProperty Name="Imposto" Relationship="Self.FK_IMPOSTOP_REFERENCE_IMPOSTO" FromRole="ImpostoProduto" ToRole="Imposto" />
           <NavigationProperty Name="Produto" Relationship="Self.FK_IMPOSTOP_REFERENCE_PRODUTO" FromRole="ImpostoProduto" ToRole="Produto" />
         </EntityType>
+        <EntityType Name="Nfe">
+          <Key>
+            <PropertyRef Name="IdNfe" />
+          </Key>
+          <Property Name="IdNfe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroNota" Type="Int32" Nullable="false" />
+          <Property Name="DestinatarioNota" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChaveAcesso" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataEmissao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="CpfDestinatario" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CnpjDestinatario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoNotaFiscal" Relationship="Self.FK_Nfe_TipoNotaFiscal" FromRole="Nfe" ToRole="TipoNotaFiscal" />
+        </EntityType>
         <EntityType Name="Perfil">
           <Key>
             <PropertyRef Name="IdPerfil" />
@@ -494,21 +506,13 @@
           <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descricao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CodigoItem" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
           <Property Name="Quantidade" Type="Int32" Nullable="false" />
-          <Property Name="ValorTotal" Type="Double" Nullable="false" />
-          <Property Name="IdentificacaoNfe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdEmpresaFornecedora" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresaRevendedora" Type="Int32" />
-          <Property Name="DataEntrada" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DataSaida" Type="DateTime" Precision="3" />
           <Property Name="CodigoIdentificador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ValorMinimoUnitarioVenda" Type="Double" />
           <Property Name="Observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoProduto" Type="Int32" Nullable="false" />
           <Property Name="LoteProduto" Type="Int32" />
           <NavigationProperty Name="Empresa" Relationship="Self.FK_Produto_EmpresaFornecedora" FromRole="Produto" ToRole="Empresa" />
-          <NavigationProperty Name="Empresa1" Relationship="Self.FK_Produto_EmpresaRevendedora" FromRole="Produto" ToRole="Empresa" />
           <NavigationProperty Name="ImpostoProduto" Relationship="Self.FK_IMPOSTOP_REFERENCE_PRODUTO" FromRole="Produto" ToRole="ImpostoProduto" />
           <NavigationProperty Name="Produto1" Relationship="Self.FK_Produto_Produto" FromRole="Produto" ToRole="Produto1" />
           <NavigationProperty Name="Produto2" Relationship="Self.FK_Produto_Produto" FromRole="Produto1" ToRole="Produto" />
@@ -544,6 +548,14 @@
           <Property Name="IdTipoImposto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Imposto" Relationship="Self.FK_IMPOSTO_REFERENCE_TIPOIMPO" FromRole="TipoImposto" ToRole="Imposto" />
+        </EntityType>
+        <EntityType Name="TipoNotaFiscal">
+          <Key>
+            <PropertyRef Name="IdTipoNotaFiscal" />
+          </Key>
+          <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Nfe" Relationship="Self.FK_Nfe_TipoNotaFiscal" FromRole="TipoNotaFiscal" ToRole="Nfe" />
         </EntityType>
         <EntityType Name="TipoProduto">
           <Key>
@@ -586,6 +598,18 @@
           <NavigationProperty Name="Empresa" Relationship="Self.FK_Venda_EmpresaRevendedora" FromRole="Venda" ToRole="Empresa" />
           <NavigationProperty Name="Produto" Relationship="Self.FK_Venda_Produto" FromRole="Venda" ToRole="Produto" />
         </EntityType>
+        <Association Name="FK_Cidade_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoId" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Empresa_TipoEmpresa">
           <End Role="TipoEmpresa" Type="Self.TipoEmpresa" Multiplicity="1" />
           <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
@@ -607,18 +631,6 @@
             </Principal>
             <Dependent Role="Produto">
               <PropertyRef Name="IdEmpresaFornecedora" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Produto_EmpresaRevendedora">
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
-          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="Produto">
-              <PropertyRef Name="IdEmpresaRevendedora" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,6 +691,18 @@
             </Principal>
             <Dependent Role="ImpostoProduto">
               <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nfe_TipoNotaFiscal">
+          <End Role="TipoNotaFiscal" Type="Self.TipoNotaFiscal" Multiplicity="1" />
+          <End Role="Nfe" Type="Self.Nfe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNotaFiscal">
+              <PropertyRef Name="IdTipoNotaFiscal" />
+            </Principal>
+            <Dependent Role="Nfe">
+              <PropertyRef Name="IdTipoNotaFiscal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -743,26 +767,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EletrobidEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Imposto" EntityType="Self.Imposto" />
           <EntitySet Name="ImpostoProduto" EntityType="Self.ImpostoProduto" />
+          <EntitySet Name="Nfe" EntityType="Self.Nfe" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" />
           <EntitySet Name="Produto" EntityType="Self.Produto" />
           <EntitySet Name="ProdutoLote" EntityType="Self.ProdutoLote" />
           <EntitySet Name="TipoEmpresa" EntityType="Self.TipoEmpresa" />
           <EntitySet Name="TipoImposto" EntityType="Self.TipoImposto" />
+          <EntitySet Name="TipoNotaFiscal" EntityType="Self.TipoNotaFiscal" />
           <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Venda" EntityType="Self.Venda" />
+          <AssociationSet Name="FK_Cidade_Estado" Association="Self.FK_Cidade_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
           <AssociationSet Name="FK_Empresa_TipoEmpresa" Association="Self.FK_Empresa_TipoEmpresa">
             <End Role="TipoEmpresa" EntitySet="TipoEmpresa" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
           <AssociationSet Name="FK_Produto_EmpresaFornecedora" Association="Self.FK_Produto_EmpresaFornecedora">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="Produto" EntitySet="Produto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Produto_EmpresaRevendedora" Association="Self.FK_Produto_EmpresaRevendedora">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
@@ -786,6 +814,10 @@
             <End Role="Produto" EntitySet="Produto" />
             <End Role="ImpostoProduto" EntitySet="ImpostoProduto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Nfe_TipoNotaFiscal" Association="Self.FK_Nfe_TipoNotaFiscal">
+            <End Role="TipoNotaFiscal" EntitySet="TipoNotaFiscal" />
+            <End Role="Nfe" EntitySet="Nfe" />
+          </AssociationSet>
           <AssociationSet Name="FK_USUARIO_REFERENCE_PERFIL" Association="Self.FK_USUARIO_REFERENCE_PERFIL">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -806,93 +838,24 @@
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Venda" EntitySet="Venda" />
           </AssociationSet>
-          <EntitySet Name="Cidade" EntityType="EletrobidModel.Cidade" />
-          <EntitySet Name="Estado" EntityType="EletrobidModel.Estado" />
-          <EntitySet Name="Nfe" EntityType="EletrobidModel.Nfe" />
-          <EntitySet Name="TipoNotaFiscal" EntityType="EletrobidModel.TipoNotaFiscal" />
-          <AssociationSet Name="FK_Cidade_Estado" Association="EletrobidModel.FK_Cidade_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Cidade" EntitySet="Cidade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Nfe_TipoNotaFiscal" Association="EletrobidModel.FK_Nfe_TipoNotaFiscal">
-            <End Role="TipoNotaFiscal" EntitySet="TipoNotaFiscal" />
-            <End Role="Nfe" EntitySet="Nfe" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Cidade">
-          <Key>
-            <PropertyRef Name="CidadeId" />
-          </Key>
-          <Property Name="CidadeId" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="EstadoId" Type="Byte" />
-          <Property Name="Capital" Type="Boolean" Nullable="false" />
-          <Property Name="CodigoIbge" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Estado" Relationship="EletrobidModel.FK_Cidade_Estado" FromRole="Cidade" ToRole="Estado" />
-        </EntityType>
-        <EntityType Name="Estado">
-          <Key>
-            <PropertyRef Name="EstadoId" />
-          </Key>
-          <Property Name="EstadoId" Type="Byte" Nullable="false" />
-          <Property Name="Sigla" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoIbge" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Cidade" Relationship="EletrobidModel.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
-        </EntityType>
-        <EntityType Name="Nfe">
-          <Key>
-            <PropertyRef Name="IdNfe" />
-          </Key>
-          <Property Name="IdNfe" Type="Int32" Nullable="false" />
-          <Property Name="NumeroNota" Type="Int32" Nullable="false" />
-          <Property Name="DestinatarioNota" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ChaveAcesso" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="DataEmissao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="CpfDestinatario" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CnpjDestinatario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TipoNotaFiscal" Relationship="EletrobidModel.FK_Nfe_TipoNotaFiscal" FromRole="Nfe" ToRole="TipoNotaFiscal" />
-        </EntityType>
-        <EntityType Name="TipoNotaFiscal">
-          <Key>
-            <PropertyRef Name="IdTipoNotaFiscal" />
-          </Key>
-          <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Nfe" Relationship="EletrobidModel.FK_Nfe_TipoNotaFiscal" FromRole="TipoNotaFiscal" ToRole="Nfe" />
-        </EntityType>
-        <Association Name="FK_Cidade_Estado">
-          <End Type="EletrobidModel.Estado" Role="Estado" Multiplicity="0..1" />
-          <End Type="EletrobidModel.Cidade" Role="Cidade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="EstadoId" />
-            </Principal>
-            <Dependent Role="Cidade">
-              <PropertyRef Name="EstadoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Nfe_TipoNotaFiscal">
-          <End Type="EletrobidModel.TipoNotaFiscal" Role="TipoNotaFiscal" Multiplicity="1" />
-          <End Type="EletrobidModel.Nfe" Role="Nfe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoNotaFiscal">
-              <PropertyRef Name="IdTipoNotaFiscal" />
-            </Principal>
-            <Dependent Role="Nfe">
-              <PropertyRef Name="IdTipoNotaFiscal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EletrobidModelStoreContainer" CdmEntityContainer="EletrobidEntities">
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="EletrobidModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="CodigoIbge" ColumnName="CodigoIbge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="EletrobidModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
@@ -907,6 +870,16 @@
                 <ScalarProperty Name="Cep" ColumnName="Cep" />
                 <ScalarProperty Name="EmpresaLeiloeira" ColumnName="EmpresaLeiloeira" />
                 <ScalarProperty Name="IdTipoEmpresa" ColumnName="IdTipoEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="EletrobidModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CodigoIbge" ColumnName="CodigoIbge" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -932,6 +905,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Nfe">
+            <EntityTypeMapping TypeName="EletrobidModel.Nfe">
+              <MappingFragment StoreEntitySet="Nfe">
+                <ScalarProperty Name="IdNfe" ColumnName="IdNfe" />
+                <ScalarProperty Name="NumeroNota" ColumnName="NumeroNota" />
+                <ScalarProperty Name="DestinatarioNota" ColumnName="DestinatarioNota" />
+                <ScalarProperty Name="ChaveAcesso" ColumnName="ChaveAcesso" />
+                <ScalarProperty Name="DataEmissao" ColumnName="DataEmissao" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="CpfDestinatario" ColumnName="CpfDestinatario" />
+                <ScalarProperty Name="CnpjDestinatario" ColumnName="CnpjDestinatario" />
+                <ScalarProperty Name="IdTipoNotaFiscal" ColumnName="IdTipoNotaFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Perfil">
             <EntityTypeMapping TypeName="EletrobidModel.Perfil">
               <MappingFragment StoreEntitySet="Perfil">
@@ -947,16 +935,9 @@
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="CodigoItem" ColumnName="CodigoItem" />
-                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
-                <ScalarProperty Name="IdentificacaoNfe" ColumnName="IdentificacaoNfe" />
                 <ScalarProperty Name="IdEmpresaFornecedora" ColumnName="IdEmpresaFornecedora" />
-                <ScalarProperty Name="IdEmpresaRevendedora" ColumnName="IdEmpresaRevendedora" />
-                <ScalarProperty Name="DataEntrada" ColumnName="DataEntrada" />
-                <ScalarProperty Name="DataSaida" ColumnName="DataSaida" />
                 <ScalarProperty Name="CodigoIdentificador" ColumnName="CodigoIdentificador" />
-                <ScalarProperty Name="ValorMinimoUnitarioVenda" ColumnName="ValorMinimoUnitarioVenda" />
                 <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="IdTipoProduto" ColumnName="IdTipoProduto" />
                 <ScalarProperty Name="LoteProduto" ColumnName="LoteProduto" />
@@ -987,6 +968,14 @@
             <EntityTypeMapping TypeName="EletrobidModel.TipoImposto">
               <MappingFragment StoreEntitySet="TipoImposto">
                 <ScalarProperty Name="IdTipoImposto" ColumnName="IdTipoImposto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNotaFiscal">
+            <EntityTypeMapping TypeName="EletrobidModel.TipoNotaFiscal">
+              <MappingFragment StoreEntitySet="TipoNotaFiscal">
+                <ScalarProperty Name="IdTipoNotaFiscal" ColumnName="IdTipoNotaFiscal" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1028,50 +1017,6 @@
                 <ScalarProperty Name="Cancelada" ColumnName="Cancelada" />
                 <ScalarProperty Name="DataCancelamento" ColumnName="DataCancelamento" />
                 <ScalarProperty Name="MotivoCancelamento" ColumnName="MotivoCancelamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cidade">
-            <EntityTypeMapping TypeName="EletrobidModel.Cidade">
-              <MappingFragment StoreEntitySet="Cidade">
-                <ScalarProperty Name="CodigoIbge" ColumnName="CodigoIbge" />
-                <ScalarProperty Name="Capital" ColumnName="Capital" />
-                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Estado">
-            <EntityTypeMapping TypeName="EletrobidModel.Estado">
-              <MappingFragment StoreEntitySet="Estado">
-                <ScalarProperty Name="CodigoIbge" ColumnName="CodigoIbge" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
-                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Nfe">
-            <EntityTypeMapping TypeName="EletrobidModel.Nfe">
-              <MappingFragment StoreEntitySet="Nfe">
-                <ScalarProperty Name="IdTipoNotaFiscal" ColumnName="IdTipoNotaFiscal" />
-                <ScalarProperty Name="CnpjDestinatario" ColumnName="CnpjDestinatario" />
-                <ScalarProperty Name="CpfDestinatario" ColumnName="CpfDestinatario" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="DataEmissao" ColumnName="DataEmissao" />
-                <ScalarProperty Name="ChaveAcesso" ColumnName="ChaveAcesso" />
-                <ScalarProperty Name="DestinatarioNota" ColumnName="DestinatarioNota" />
-                <ScalarProperty Name="NumeroNota" ColumnName="NumeroNota" />
-                <ScalarProperty Name="IdNfe" ColumnName="IdNfe" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoNotaFiscal">
-            <EntityTypeMapping TypeName="EletrobidModel.TipoNotaFiscal">
-              <MappingFragment StoreEntitySet="TipoNotaFiscal">
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="IdTipoNotaFiscal" ColumnName="IdTipoNotaFiscal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

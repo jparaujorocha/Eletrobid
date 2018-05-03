@@ -56,12 +56,6 @@
     <Compile Include="Cidade.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
-    <Compile Include="Estado.cs">
-      <DependentUpon>Eletrobid.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Nfe.cs">
-      <DependentUpon>Eletrobid.tt</DependentUpon>
-    </Compile>
     <Compile Include="Eletrobid.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,6 +74,9 @@
     <Compile Include="Empresa.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
+    <Compile Include="Estado.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imposto.cs">
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
@@ -87,6 +84,9 @@
       <DependentUpon>Eletrobid.tt</DependentUpon>
     </Compile>
     <Compile Include="LoggedUser.cs" />
+    <Compile Include="Nfe.cs">
+      <DependentUpon>Eletrobid.tt</DependentUpon>
+    </Compile>
     <Compile Include="Partial\Cidade.cs" />
     <Compile Include="Partial\Empresa.cs" />
     <Compile Include="Partial\Estado.cs" />

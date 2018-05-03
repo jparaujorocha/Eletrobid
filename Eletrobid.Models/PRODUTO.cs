@@ -26,22 +26,14 @@ namespace Eletrobid.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string CodigoItem { get; set; }
-        public double ValorUnitario { get; set; }
         public int Quantidade { get; set; }
-        public double ValorTotal { get; set; }
-        public string IdentificacaoNfe { get; set; }
         public int IdEmpresaFornecedora { get; set; }
-        public Nullable<int> IdEmpresaRevendedora { get; set; }
-        public System.DateTime DataEntrada { get; set; }
-        public Nullable<System.DateTime> DataSaida { get; set; }
         public string CodigoIdentificador { get; set; }
-        public Nullable<double> ValorMinimoUnitarioVenda { get; set; }
         public string Observacao { get; set; }
         public int IdTipoProduto { get; set; }
         public Nullable<int> LoteProduto { get; set; }
     
         public virtual Empresa Empresa { get; set; }
-        public virtual Empresa Empresa1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImpostoProduto> ImpostoProduto { get; set; }
         public virtual Produto Produto1 { get; set; }

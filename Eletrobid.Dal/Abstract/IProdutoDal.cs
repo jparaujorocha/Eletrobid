@@ -24,8 +24,7 @@ namespace Eletrobid.Dal
         IEnumerable<Produto> ListaProdutos();
 
         IEnumerable<Produto> ListaProdutosFornecedor(int idEmpresaFornecedora);
-
-        IEnumerable<Produto> ListaProdutosRevendedor(int idEmpresaRevendedora);
+        
 
         IEnumerable<Produto> ListaProdutosTipoProduto(int idTipoProduto);
 
