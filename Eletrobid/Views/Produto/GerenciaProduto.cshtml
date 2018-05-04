@@ -7,7 +7,8 @@
 <h2 class="text-center">Produtos</h2>
 
 <p class="float-right">
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar", "InserirProduto", null, new { @class = "btn btn-success btn-sm" })
+    @Html.ActionLink("Adicionar Vários", "Create", null, new { @class = "btn btn-success btn-sm" })
 </p>
 <table class="table table-hover table-responsive-xl text-center">
     <thead class="thead-dark">

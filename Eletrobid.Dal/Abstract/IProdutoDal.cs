@@ -11,8 +11,8 @@ namespace Eletrobid.Dal
     {
         Produto GetProdutoId(int idProduto);
 
-        Produto GetProdutoCodigoItem(string codigoItem);
-
+        Produto GetProdutoCodigoItem(string codigoItem, int idEmpresaFornecedora);
+        
         Produto GetProdutoCodigoIdentificador(string codigoIdentificador);
 
         Produto InsereProduto(Produto dadosProduto);
@@ -27,7 +27,5 @@ namespace Eletrobid.Dal
         
 
         IEnumerable<Produto> ListaProdutosTipoProduto(int idTipoProduto);
-
-        IEnumerable<Produto> ListaProdutosLoteProduto(int loteProduto);
     }
 }

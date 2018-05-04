@@ -51,9 +51,9 @@ namespace Eletrobid.Dal
             return (from c in _dbContext.Produto where c.CodigoIdentificador == codigoIdentificador select c).FirstOrDefault();
         }
 
-        public Produto GetProdutoCodigoItem(string codigoItem)
+        public Produto GetProdutoCodigoItem(string codigoItem, int idEmpresaFornecedora)
         {
-            return (from c in _dbContext.Produto where c.CodigoItem == codigoItem select c).FirstOrDefault();
+            return (from c in _dbContext.Produto where c.CodigoItem == codigoItem && c.IdEmpresaFornecedora == idEmpresaFornecedora select c).FirstOrDefault();
         }
 
         public Produto GetProdutoId(int idProduto)
@@ -78,11 +78,7 @@ namespace Eletrobid.Dal
         {
             return (from c in _dbContext.Produto where c.IdEmpresaFornecedora == idEmpresaFornecedora select c).ToList();
         }
-
-        public IEnumerable<Produto> ListaProdutosLoteProduto(int loteProduto)
-        {
-            return (from c in _dbContext.Produto where c.LoteProduto == loteProduto select c).ToList();
-        }
+        
         
         public IEnumerable<Produto> ListaProdutosTipoProduto(int idTipoProduto)
         {

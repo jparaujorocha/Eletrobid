@@ -82,6 +82,7 @@ namespace Eletrobid.Dal
             return (from c in _dbContext.Empresa select c).ToList();
         }
 
+
         public IEnumerable<Empresa> ListaEmpresas(int idTipoEmpresa)
         {
             return (from c in _dbContext.Empresa where c.IdTipoEmpresa == idTipoEmpresa select c).ToList();

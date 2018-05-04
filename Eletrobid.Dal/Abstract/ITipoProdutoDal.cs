@@ -12,6 +12,8 @@ namespace Eletrobid.Dal
 
         TipoProduto EditaTipoProduto(TipoProduto dadosTipoProduto);
 
+        IEnumerable<TipoProduto> ListaTipoProduto();
+
         void ExcluiTipoProduto(int idTipoProduto);
 
     }

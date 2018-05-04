@@ -31,15 +31,9 @@ namespace Eletrobid.Models
 
         [Display(Name = "Código Identificador do Produto")]
         public string CodigoIdentificador { get; set; }
-        
-        [Display(Name = "Observação")]
-        public string Observacao { get; set; }
 
         [Display(Name = "Tipo do Produto")]
         public int IdTipoProduto { get; set; }
-
-        [Display(Name = "Lote do Produto")]
-        public int? LoteProduto { get; set; }
 
     }
 }

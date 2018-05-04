@@ -30,7 +30,6 @@ namespace Eletrobid.Models
         public int IdEmpresaFornecedora { get; set; }
         public string CodigoIdentificador { get; set; }
         public int IdTipoProduto { get; set; }
-        public Nullable<int> LoteProduto { get; set; }
     
         public virtual Empresa Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

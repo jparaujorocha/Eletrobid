@@ -39,6 +39,11 @@ namespace Eletrobid.Dal
             return dadosTipoProduto;
         }
 
+        public IEnumerable<TipoProduto> ListaTipoProduto()
+        {
+            return (from c in _dbContext.TipoProduto select c).ToList();
+        }
+
         public void ExcluiTipoProduto(int idTipoProduto)
         {
             var dadosTipoProduto = GetTipoProduto(idTipoProduto);
