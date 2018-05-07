@@ -75,6 +75,11 @@ namespace Eletrobid.Dal.Concrete
             return (from c in _dbContext.Nfe where c.CnpjDestinatario == cnpj select c).ToList();
         }
 
+        public IEnumerable<Nfe> ListaNotasEntrada()
+        {
+            return (from c in _dbContext.Nfe where c.IdTipoNotaFiscal == 4 select c).ToList();
+        }
+
         public IEnumerable<Nfe> ListaNotasCpf(string cpf)
         {
             return (from c in _dbContext.Nfe where c.CpfDestinatario == cpf select c).ToList();

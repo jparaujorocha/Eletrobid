@@ -23,6 +23,7 @@ namespace Eletrobid.Models
         public string CpfDestinatario { get; set; }
         public string CnpjDestinatario { get; set; }
         public int IdTipoNotaFiscal { get; set; }
+        public int QtdeProdutos { get; set; }
     
         public virtual TipoNotaFiscal TipoNotaFiscal { get; set; }
     }

@@ -18,9 +18,11 @@ namespace Eletrobid.Controllers
         private readonly IImpostoProdutoDal _impostoProdutoDal;
         private readonly ITipoProdutoDal _tipoProduto;
         private readonly IVendaDal _vendaDal;
+        private readonly INfeDal _nfeDal;
+
         private readonly string caminhoAddProdutos = @"C:\Users\joaopedro\Desktop\BDL\Produtos_Adicionados\";
 
-        public ProdutoController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal)
+        public ProdutoController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal, INfeDal nfeDal)
         {
             _produtoDal = produtoDal;
             _impostoDal = impostoDal;
@@ -28,6 +30,7 @@ namespace Eletrobid.Controllers
             _tipoProduto = tipoProduto;
             _vendaDal = vendaDal;
             _empresaDal = empresaDal;
+            _nfeDal = nfeDal;
         }
 
         public ActionResult Index()
@@ -40,6 +43,7 @@ namespace Eletrobid.Controllers
         public ActionResult GerenciaProduto()
         {
             var produtos = _produtoDal.ListaProdutos();
+            ViewBag.TotalEntradas = _nfeDal.ListaNotasEntrada().Sum(c => c.QtdeProdutos);
             return View(produtos);
         }
 
@@ -128,96 +132,123 @@ namespace Eletrobid.Controllers
                         //Verifica se são planilhas no formato xls ou xlsx
                         if (Path.GetExtension(item.FileName) == ".xlsx" || Path.GetExtension(item.FileName) == ".xls")
                         {
-                            using (var reader = ExcelReaderFactory.CreateReader(item.InputStream))
+                            IExcelDataReader excelReader;
+                            if (Path.GetExtension(item.FileName) == ".xls")
                             {
-                                var result = reader.AsDataSet().Tables[0];
+                                excelReader = ExcelReaderFactory.CreateBinaryReader(item.InputStream);
+                            }
+                            else
+                            {
+                                excelReader = ExcelReaderFactory.CreateOpenXmlReader(item.InputStream);
+                            }
+                            var tabela = excelReader.AsDataSet().Tables[0];
 
-                                //Verificar se o número de colunas corresponde ao padrão.
-                                if (result.Columns.Count == 3)
+                            //Verificar se o número de colunas corresponde ao padrão.
+                            if (tabela.Columns.Count == 3)
+                            {
+                                var conteudo = tabela.Rows;
+
+                                for (int i = 1; i < conteudo.Count; i++)
                                 {
-                                    var conteudo = result.Rows;
-
-                                    for (int i = 1; i < conteudo.Count; i++)
+                                    //Verificar se Alguma coluna da linha está nula
+                                    if (!conteudo[i].IsNull(0) && !conteudo[i].IsNull(1) && !conteudo[i].IsNull(2))
                                     {
-                                        //Verificar se Alguma coluna da linha está nula
-                                        if (!conteudo[i].IsNull(0) && !conteudo[i].IsNull(1) && !conteudo[i].IsNull(2))
+                                        var dadosLinha = conteudo[i].ItemArray;
+
+                                        //Verifica se os padrões exigidos foram seguidos
+                                        if (!string.IsNullOrWhiteSpace(dadosLinha[0].ToString()) && !string.IsNullOrEmpty(dadosLinha[0].ToString()) && !string.IsNullOrWhiteSpace(dadosLinha[1].ToString()) && !string.IsNullOrEmpty(dadosLinha[1].ToString()) && dadosLinha[1].ToString().Length >= 5 && dadosLinha[1].ToString().Length <= 255 && !string.IsNullOrWhiteSpace(dadosLinha[2].ToString()) && !string.IsNullOrEmpty(dadosLinha[2].ToString()) && Convert.ToInt32(dadosLinha[2].ToString()) > 0)
                                         {
-                                            var dadosLinha = conteudo[i].ItemArray;
+                                            Produto dadosInsercao = new Produto();
 
-                                            //Verifica se os padrões exigidos foram seguidos
-                                            if (!string.IsNullOrWhiteSpace(dadosLinha[0].ToString()) && !string.IsNullOrEmpty(dadosLinha[0].ToString()) && !string.IsNullOrWhiteSpace(dadosLinha[1].ToString()) && !string.IsNullOrEmpty(dadosLinha[1].ToString()) && dadosLinha[1].ToString().Length >= 5 && dadosLinha[1].ToString().Length <= 255 && !string.IsNullOrWhiteSpace(dadosLinha[2].ToString()) && !string.IsNullOrEmpty(dadosLinha[2].ToString()) && Convert.ToInt32(dadosLinha[2].ToString()) > 0)
+                                            dadosInsercao.IdEmpresaFornecedora = dadosProduto.IdEmpresaFornecedora;
+                                            dadosInsercao.IdTipoProduto = dadosProduto.IdTipoProduto;
+                                            dadosInsercao.CodigoItem = dadosLinha[0].ToString();
+                                            dadosInsercao.Nome = dadosLinha[1].ToString();
+                                            dadosInsercao.Quantidade = Convert.ToInt32(dadosLinha[2].ToString());
+
+                                            var getProduto = _produtoDal.GetProdutoCodigoItem(dadosInsercao.CodigoItem, dadosProduto.IdEmpresaFornecedora);
+
+                                            if (getProduto == null)
                                             {
-                                                dadosProduto.CodigoItem = dadosLinha[0].ToString();
-                                                dadosProduto.Nome = dadosLinha[1].ToString();
-                                                dadosProduto.Quantidade = Convert.ToInt32(dadosLinha[3].ToString());
-
-                                                var getProduto = _produtoDal.GetProdutoCodigoItem(dadosProduto.CodigoItem, dadosProduto.IdEmpresaFornecedora);
-
-                                                if (getProduto == null)
-                                                {
-                                                    _produtoDal.InsereProduto(dadosProduto);
-                                                    numeroProdutosAdicionados += dadosProduto.Quantidade;
-                                                    numeroLinhasCorretas++;
-                                                }
-                                                else
-                                                {
-                                                    getProduto.Quantidade = getProduto.Quantidade + dadosProduto.Quantidade;
-                                                    _produtoDal.EditaProduto(getProduto);
-                                                    numeroProdutosAdicionados += dadosProduto.Quantidade;
-                                                    numeroLinhasCorretas++;
-                                                }
-
-                                            }//Fim do IF das verificações dos padrões
-
+                                                _produtoDal.InsereProduto(dadosInsercao);
+                                                numeroProdutosAdicionados += dadosInsercao.Quantidade;
+                                                numeroLinhasCorretas++;
+                                            }
                                             else
                                             {
-                                                var erro = "Verifique se os dados da linha " + (i + 1) + " do Arquivo " + item.FileName + " Estão de arcodo com os padrões";
-                                                numeroErros++;
-                                                listaErros.Add(erro);
+                                                getProduto.Quantidade = getProduto.Quantidade + dadosInsercao.Quantidade;
+                                                _produtoDal.EditaProduto(getProduto);
+                                                numeroProdutosAdicionados += dadosInsercao.Quantidade;
+                                                numeroLinhasCorretas++;
+                                            }
 
-                                            }//Fim do ELSE das verificações dos padrões
-
-                                        }//Fim do IF das verificações de linhas nulas
+                                        }//Fim do IF das verificações dos padrões
 
                                         else
                                         {
-                                            var erro = "Verifique se os dados da linha " + (i + 1) + " do Arquivo " + item.FileName + " Estão preenchidos e de arcodo com os padrões";
+                                            var erro = "Verifique se os dados da linha " + (i + 1) + " do Arquivo \"" + item.FileName + "\" Estão de arcodo com os padrões";
                                             numeroErros++;
                                             listaErros.Add(erro);
 
-                                        }//Fim do ELSE das verificações de linhas nulas
-                                    }
+                                        }//Fim do ELSE das verificações dos padrões
 
-                                }//Fim do IF da verificação de número de colunas
+                                    }//Fim do IF das verificações de linhas nulas
 
-                                else
-                                {
-                                    var erro = "Verifique se o Arquivo" + item.FileName + " Contém o número de colunas do nosso padrão.";
-                                    numeroErros++;
-                                    listaErros.Add(erro);
-                                }//Fim do ELSE da verificação de número de colunas
-                            }
+                                    else
+                                    {
+                                        var erro = "Verifique se os dados da linha " + (i + 1) + " do Arquivo \"" + item.FileName + "\" Estão preenchidos e de arcodo com os padrões";
+                                        numeroErros++;
+                                        listaErros.Add(erro);
+
+                                    }//Fim do ELSE das verificações de linhas nulas
+                                }
+
+                            }//Fim do IF da verificação de número de colunas
+
+                            else
+                            {
+                                var erro = "Verifique se o Arquivo \"" + item.FileName + "\" Contém o número de colunas do nosso padrão.";
+                                numeroErros++;
+                                listaErros.Add(erro);
+                            }//Fim do ELSE da verificação de número de colunas
+
 
                         }//Fim do IF da verificação de extensão do arquivo
 
                         else
                         {
-                            var erro = "Verifique se o Arquivo" + item.FileName + " é um arquivo de formato .xls ou .xlsx.<br /> Apenas essas extensões são suportadas.";
+                            var erro = "Verifique se o Arquivo \"" + item.FileName + "\" é um arquivo de formato .xls ou .xlsx. Apenas essas extensões são suportadas.";
                             numeroErros++;
                             listaErros.Add(erro);
 
                         }//Fim do ELSE da verificação de extensão do arquivo
                     }
 
-                }
+                    TempData["listaErros"] = listaErros;
+                    return RedirectToAction("ResultadoLeitura", new { numeroErros = numeroErros, numeroLinhasCorretas = numeroLinhasCorretas, numeroProdutosAdicionados = numeroProdutosAdicionados });
+
+                }//Fim do IF para verificar se existe arquivos
                 else
                 {
-                    //Inserir Mensagem exigindo que planilhas sejam adicionadas.
+                    TempData["inserirPlanilha"] = "Adicione Planilhas para a leitura.";
                     return View(dadosProduto);
-                }
+                }//Fim do ELSE para verificar se existe arquivos
             }
 
             return View(dadosProduto);
+        }
+
+        public ActionResult ResultadoLeitura(int numeroErros, int numeroLinhasCorretas, int numeroProdutosAdicionados)
+        {
+            var listaErros = (List<string>)TempData["listaErros"];
+            if (listaErros == null)
+            {
+                return RedirectToAction("InserirProdutos");
+            }
+            ViewBag.NumeroErros = numeroErros;
+            ViewBag.NumeroLinhasCorretas = numeroLinhasCorretas;
+            ViewBag.NumeroProdutosAdicionados = numeroProdutosAdicionados;
+            return View();
         }
 
 

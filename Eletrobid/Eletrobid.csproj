@@ -367,6 +367,7 @@
     <Content Include="Views\Produto\GerenciaProduto.cshtml" />
     <Content Include="Views\Produto\InserirProduto.cshtml" />
     <Content Include="Views\Produto\InserirProdutos.cshtml" />
+    <Content Include="Views\Produto\ResultadoLeitura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -32,5 +32,7 @@ namespace Eletrobid.Models
         public string CnpjDestinatario { get; set; }
 
         public int IdTipoNotaFiscal { get; set; }
+
+        public int QtdeProdutos { get; set; }
     }
 }

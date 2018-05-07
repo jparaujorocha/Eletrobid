@@ -229,6 +229,7 @@ namespace Eletrobid.Nfe
                                     dadosNota.IdTipoNotaFiscal = 1;
                                     dadosNota.NumeroNota = nUltimaNotaEmitida;
                                     dadosNota.Valor = Convert.ToDouble(dadosLinha[3].ToString().Replace(",", "."));
+                                    dadosNota.QtdeProdutos = Convert.ToInt32(dadosLinha[2].ToString());
 
                                     dalNota.InserirNota(dadosNota);
                                 }

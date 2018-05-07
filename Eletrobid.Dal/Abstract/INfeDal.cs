@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eletrobid.Dal.Abstract
+namespace Eletrobid.Dal
 {
     public interface INfeDal : IDisposable
     {
@@ -15,6 +15,7 @@ namespace Eletrobid.Dal.Abstract
         Nfe InserirNota(Nfe dadosNota);
         Nfe EditarNota(Nfe dadosNota);
         IEnumerable<Nfe> ListaNotasCpf(string cpf);
+        IEnumerable<Nfe> ListaNotasEntrada();
         IEnumerable<Nfe> ListaNotasCnpj(string cnpj);
     }
 }

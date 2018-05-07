@@ -73,6 +73,7 @@
           <Property Name="CpfDestinatario" Type="varchar" MaxLength="12" />
           <Property Name="CnpjDestinatario" Type="varchar" MaxLength="255" />
           <Property Name="IdTipoNotaFiscal" Type="int" Nullable="false" />
+          <Property Name="QtdeProdutos" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -487,6 +488,7 @@
           <Property Name="CnpjDestinatario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TipoNotaFiscal" Relationship="Self.FK_Nfe_TipoNotaFiscal" FromRole="Nfe" ToRole="TipoNotaFiscal" />
+          <Property Name="QtdeProdutos" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -904,6 +906,7 @@
           <EntitySetMapping Name="Nfe">
             <EntityTypeMapping TypeName="EletrobidModel.Nfe">
               <MappingFragment StoreEntitySet="Nfe">
+                <ScalarProperty Name="QtdeProdutos" ColumnName="QtdeProdutos" />
                 <ScalarProperty Name="IdNfe" ColumnName="IdNfe" />
                 <ScalarProperty Name="NumeroNota" ColumnName="NumeroNota" />
                 <ScalarProperty Name="DestinatarioNota" ColumnName="DestinatarioNota" />

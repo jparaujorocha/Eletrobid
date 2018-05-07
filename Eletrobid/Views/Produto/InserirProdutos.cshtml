@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Inserir Produtos";
+    var msgInserirPlanilha = (string)TempData["inserirPlanilha"];
 }
 
-<h2 class="text-center">Inserir Produtos</h2>
+<h2 class="text-center">Inserir Vários Produtos</h2>
 
 
 @using (Html.BeginForm("InserirProdutos", "Produto", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -12,9 +13,8 @@
     @Html.AntiForgeryToken()
 
     <form>
-        <h4 class="text-center">Inserir Vários Produtos</h4>
         <hr />
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CodigoItem)
         @Html.HiddenFor(model => model.Nome)
         @Html.HiddenFor(model => model.Quantidade)
@@ -43,8 +43,12 @@
 
             <div class="form-row mt-3">
                 <div class="form-group col">
-                    <label> Arquivo com os produtos </label>
+                    <label><strong> Arquivo com os produtos </strong></label>
                     <input type=file multiple name="planilhas" id="planilhas" accept=".xlsx,.xls" />
+                    @if(!string.IsNullOrEmpty(msgInserirPlanilha) && !string.IsNullOrWhiteSpace(msgInserirPlanilha))
+                    {
+                        <div class="text-danger">@msgInserirPlanilha</div>
+                    }
                 </div>
             </div>
 

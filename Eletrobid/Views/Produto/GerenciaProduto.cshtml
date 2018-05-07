@@ -2,14 +2,32 @@
 
 @{
     ViewBag.Title = "Gerencia de Produtos";
+    int totalEstoque = 0;
+    int totalVendidos = 0;
+    int totalEntradas = (int)ViewBag.TotalEntradas;
+
+    if (Model != null && Model.Count() > 0)
+    {
+        totalEstoque =  Model.Sum(c => c.Quantidade);
+        totalVendidos = Model.Sum(c => c.Venda.Sum(d => d.QuantidadeVenda));
+    }
+
 }
 
 <h2 class="text-center">Produtos</h2>
+<div class="my-5">
+    <div class="float-left">
+        <p class="text-dark">Total de Entrada de Produtos: <strong>@totalEntradas </strong></p>
+        <p class="text-dark">Total de Produtos Vendidos: <strong>@totalVendidos </strong></p>
+        <p class="text-dark">Total de Produtos em Estoque: <strong>@totalEstoque </strong></p>
+    </div>
 
-<p class="float-right">
-    @Html.ActionLink("Adicionar", "InserirProduto", null, new { @class = "btn btn-success btn-sm" })
-    @Html.ActionLink("Adicionar Vários", "Create", null, new { @class = "btn btn-success btn-sm" })
-</p>
+    <div class="float-right">
+        <p>@Html.ActionLink("Adicionar", "InserirProduto", null, new { @class = "btn btn-success btn-sm" })</p>
+        <p>@Html.ActionLink("Adicionar Vários", "InserirProdutos", null, new { @class = "btn btn-success btn-sm" })</p>
+    </div>
+</div>
+
 <table class="table table-hover table-responsive-xl text-center">
     <thead class="thead-dark">
         <tr>
@@ -52,8 +70,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
     }
