@@ -1,0 +1,70 @@
+﻿@model Eletrobid.Models.Produto
+
+@{
+    ViewBag.Title = "Inserir Produto";
+}
+
+<h2 class="text-center">Inserir Produto</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        <h4 class="text-center">Dados do Produto</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdProduto)
+        @Html.HiddenFor(model => model.IdNfe)
+        @Html.HiddenFor(model => model.CodigoIdentificador)
+        <fieldset>
+            <div class="form-row mt-3">
+                <div class="form-group col">
+                    @Html.LabelFor(model => model.CodigoItem, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    @Html.EditorFor(model => model.CodigoItem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CodigoItem, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", maxlength = 255 })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control", maxlength = 255 })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="form-group col ">
+                    @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col" })
+                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control", min = "1" } })
+                    @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col">
+                    @Html.LabelFor(model => model.IdTipoProduto, htmlAttributes: new { @class = "control-label col" })
+                    @Html.DropDownListFor(model => model.IdTipoProduto, (SelectList)ViewBag.ListTipoProduto, "Selecione o Tipo", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdTipoProduto, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col">
+                    @Html.LabelFor(model => model.IdEmpresaFornecedora, htmlAttributes: new { @class = "control-label col" })
+                    @Html.DropDownListFor(model => model.IdEmpresaFornecedora, (SelectList)ViewBag.ListEmpresaFornecedora, "Selecione uma Empresa", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdEmpresaFornecedora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row text-center">
+                <div class="form-group col">
+                    @Html.ActionLink("Voltar", "DetalhesNfe", new { idNfe = Model.IdNfe }, new { @class = "btn btn-default" })
+                    <button class="btn btn-primary" type="submit">Inserir</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -30,6 +30,7 @@ namespace Eletrobid.Models
         public int IdEmpresaFornecedora { get; set; }
         public string CodigoIdentificador { get; set; }
         public int IdTipoProduto { get; set; }
+        public int IdNfe { get; set; }
     
         public virtual Empresa Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -41,5 +42,6 @@ namespace Eletrobid.Models
         public virtual ICollection<ProdutoLote> ProdutoLote { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Venda> Venda { get; set; }
+        public virtual Nfe Nfe { get; set; }
     }
 }

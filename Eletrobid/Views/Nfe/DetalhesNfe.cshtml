@@ -1,0 +1,86 @@
+﻿@model Eletrobid.Models.Nfe
+
+@{
+    ViewBag.Title = "Detalhes da Nfe";
+}
+
+<h2 class="text-center">Produtos da Nota de @Model.TipoNotaFiscal.Nome número <strong>@Model.NumeroNota</strong></h2>
+
+<div class="my-5">
+    <div class="float-left">
+        <p class="text-dark">Chave de Acesso: <strong>@Model.ChaveAcesso</strong></p>
+    </div>
+    <div class="float-right">
+        <p>@Html.ActionLink("Adicionar Produto", "InserirProduto", new { idNfe = Model.IdNfe }, new { @class = "btn btn-success btn-sm" }) @Html.ActionLink("Adicionar Vários Produtos", "InserirProdutos", new { idNfe = Model.IdNfe }, new { @class = "btn btn-success btn-sm" })</p>
+    </div>
+</div>
+<div>
+@if (Model.Produto.Count() > 0 && Model.Produto != null)
+{
+    <table class="table table-hover table-responsive-xl text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    Origem
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.Produto)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.NomeFantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoProduto.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <table class="table table-hover table-responsive-xl text-center">
+        <tr>
+            <td>
+                <div class="alert alert-success text-center">
+                    Nenhum produto cadastrado para essa Nota Fiscal!
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+
+<div class="form-row text-center">
+    <div class="form-group col">
+        @Html.ActionLink("Voltar", "GerenciaNfe", null, new { @class = "btn btn-default" })
+    </div>
+</div>
+</div>

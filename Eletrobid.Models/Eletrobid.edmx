@@ -94,6 +94,7 @@
           <Property Name="IdEmpresaFornecedora" Type="int" Nullable="false" />
           <Property Name="CodigoIdentificador" Type="varchar(max)" />
           <Property Name="IdTipoProduto" Type="int" Nullable="false" />
+          <Property Name="IdNfe" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProdutoLote">
           <Key>
@@ -248,6 +249,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Produto_Nfe">
+          <End Role="Nfe" Type="Self.Nfe" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nfe">
+              <PropertyRef Name="IdNfe" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdNfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Produto_Produto">
           <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
           <End Role="Produto1" Type="Self.Produto" Multiplicity="0..1" />
@@ -376,6 +389,10 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Produto_Nfe" Association="Self.FK_Produto_Nfe">
+            <End Role="Nfe" EntitySet="Nfe" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
           <AssociationSet Name="FK_Produto_Produto" Association="Self.FK_Produto_Produto">
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Produto1" EntitySet="Produto" />
@@ -489,6 +506,7 @@
           <Property Name="IdTipoNotaFiscal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TipoNotaFiscal" Relationship="Self.FK_Nfe_TipoNotaFiscal" FromRole="Nfe" ToRole="TipoNotaFiscal" />
           <Property Name="QtdeProdutos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="EletrobidModel.FK_Produto_Nfe" FromRole="Nfe" ToRole="Produto" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -517,6 +535,8 @@
           <NavigationProperty Name="TipoProduto" Relationship="Self.FK_PRODUTO_REFERENCE_TIPOPROD" FromRole="Produto" ToRole="TipoProduto" />
           <NavigationProperty Name="ProdutoLote" Relationship="Self.FK_ProdutoLote_Produto" FromRole="Produto" ToRole="ProdutoLote" />
           <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_Produto" FromRole="Produto" ToRole="Venda" />
+          <Property Name="IdNfe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Nfe" Relationship="EletrobidModel.FK_Produto_Nfe" FromRole="Produto" ToRole="Nfe" />
         </EntityType>
         <EntityType Name="ProdutoLote">
           <Key>
@@ -836,7 +856,23 @@
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Venda" EntitySet="Venda" />
           </AssociationSet>
+          <AssociationSet Name="FK_Produto_Nfe" Association="EletrobidModel.FK_Produto_Nfe">
+            <End Role="Nfe" EntitySet="Nfe" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Produto_Nfe">
+          <End Type="EletrobidModel.Nfe" Role="Nfe" Multiplicity="1" />
+          <End Type="EletrobidModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nfe">
+              <PropertyRef Name="IdNfe" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdNfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -930,6 +966,7 @@
           <EntitySetMapping Name="Produto">
             <EntityTypeMapping TypeName="EletrobidModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="IdNfe" ColumnName="IdNfe" />
                 <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />

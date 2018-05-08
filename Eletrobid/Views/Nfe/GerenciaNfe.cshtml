@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Eletrobid.Models.Nfe>
+
+@{
+    ViewBag.Title = "GerenciaNfe";
+}
+
+<h2 class="text-center">Notas</h2>
+
+    <div class="float-right">
+        <p>@Html.ActionLink("Adicionar", "InserirNota", null, new { @class = "btn btn-success btn-sm" })</p>
+    </div>
+<div>
+<table class="table table-hover table-responsive-xl text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroNota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinatarioNota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataEmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpfDestinatario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CnpjDestinatario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoNotaFiscal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdeProdutos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNfe)
+            </td>
+            <td>
+                <a href="@Url.Action("DetalhesNfe", "Nfe", new { idNfe = item.IdNfe })"> @item.NumeroNota </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinatarioNota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CpfDestinatario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CnpjDestinatario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoNotaFiscal.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdeProdutos)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditaNfe", new { idNfe = item.IdNfe })
+            </td>
+        </tr>
+    }
+
+</table>
+
+</div>

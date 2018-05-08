@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Eletrobid.Controllers
 {
-    public class ProdutoController : Controller
+    public class NfeController : Controller
     {
         private readonly IProdutoDal _produtoDal;
         private readonly IEmpresaDal _empresaDal;
@@ -19,10 +19,11 @@ namespace Eletrobid.Controllers
         private readonly ITipoProdutoDal _tipoProduto;
         private readonly IVendaDal _vendaDal;
         private readonly INfeDal _nfeDal;
+        // GET: Nfe
 
         private readonly string caminhoAddProdutos = @"C:\Users\joaopedro\Desktop\BDL\Produtos_Adicionados\";
 
-        public ProdutoController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal, INfeDal nfeDal)
+        public NfeController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal, INfeDal nfeDal)
         {
             _produtoDal = produtoDal;
             _impostoDal = impostoDal;
@@ -38,24 +39,51 @@ namespace Eletrobid.Controllers
             return View();
         }
 
-
-        // GET: Produto
-        public ActionResult GerenciaProduto()
-        {
-            var produtos = _produtoDal.ListaProdutos();
-            ViewBag.TotalEntradas = _nfeDal.ListaNotasEntrada().Sum(c => c.QtdeProdutos);
-            return View(produtos);
-        }
-
-        public ActionResult InserirProduto()
+        public ActionResult GerenciaNfe()
         {
             Produto dadosProduto = new Produto();
+            var listaTipoNfe = new SelectList(_nfeDal.ListaTipoNfe(), "IdTipoNotaFiscal", "Nome");
+            var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
+
+            ViewBag.ListaTipoNfe = listaTipoNfe;
+            ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
+
+            var notas = _nfeDal.ListaNotas();
+            return View(notas);
+        }
+
+        public ActionResult DetalhesNfe(int idNfe)
+        {
+            var dadosNfe = _nfeDal.GetNfe(idNfe);
+
+            if (dadosNfe != null)
+            {
+                return View(dadosNfe);
+            }
+            else
+            {
+                return RedirectToAction("GerenciaNfe");
+            }
+        }
+
+        public ActionResult InserirProduto(int idNfe)
+        {
             var listaTipoProduto = new SelectList(_tipoProduto.ListaTipoProduto(), "IdTipoProduto", "Nome");
             var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
 
-            ViewBag.ListTipoProduto = listaTipoProduto;
-            ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
-            return View(dadosProduto);
+            if (_nfeDal.ExisteNota(idNfe) == true)
+            {
+                Produto dadosProduto = new Produto();
+                dadosProduto.IdNfe = idNfe;
+                ViewBag.ListTipoProduto = listaTipoProduto;
+                ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
+
+                return View(dadosProduto);
+            }
+            else
+            {
+                return RedirectToAction("GerenciaNfe");
+            }
         }
 
         [HttpPost]
@@ -68,22 +96,33 @@ namespace Eletrobid.Controllers
 
             if (ModelState.IsValid)
             {
+                if (_nfeDal.ExisteNota(dadosProduto.IdNfe) == false)
+                {
+                    return RedirectToAction("GerenciaNfe");
+                }
+
                 if (!string.IsNullOrWhiteSpace(dadosProduto.CodigoItem) && !string.IsNullOrEmpty(dadosProduto.CodigoItem))
                 {
                     var getProduto = _produtoDal.GetProdutoCodigoItem(dadosProduto.CodigoItem, dadosProduto.IdEmpresaFornecedora);
 
                     if (getProduto == null)
                     {
-                        _produtoDal.InsereProduto(dadosProduto);
+                        var produtoInserido = _produtoDal.InsereProduto(dadosProduto);
                         ModelState.Clear();
-                        return View();
+                        Produto getIdNfe = new Produto();
+                        getIdNfe.IdNfe = produtoInserido.IdNfe;
+                        _nfeDal.AtualizaQtde(produtoInserido.IdNfe);
+                        return View(getIdNfe);
                     }
                     else
                     {
                         getProduto.Quantidade = getProduto.Quantidade + dadosProduto.Quantidade;
                         _produtoDal.EditaProduto(getProduto);
                         ModelState.Clear();
-                        return View();
+                        Produto getIdNfe = new Produto();
+                        getIdNfe.IdNfe = getProduto.IdNfe;
+                        _nfeDal.AtualizaQtde(getProduto.IdNfe);
+                        return View(getIdNfe);
                     }
                 }
                 else
@@ -96,15 +135,25 @@ namespace Eletrobid.Controllers
             return View(dadosProduto);
         }
 
-        public ActionResult InserirProdutos()
+        public ActionResult InserirProdutos(int idNfe)
         {
             var listaTipoProduto = new SelectList(_tipoProduto.ListaTipoProduto(), "IdTipoProduto", "Nome");
             var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
 
-            ViewBag.ListTipoProduto = listaTipoProduto;
-            ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
+            if (_nfeDal.ExisteNota(idNfe) == true)
+            {
+                Produto dadosProduto = new Produto();
 
-            return View();
+                dadosProduto.IdNfe = idNfe;
+                ViewBag.ListTipoProduto = listaTipoProduto;
+                ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
+                return View(dadosProduto);
+            }
+
+            else
+            {
+                return RedirectToAction("GerenciaNfe");
+            }
         }
 
         [HttpPost]
@@ -124,6 +173,12 @@ namespace Eletrobid.Controllers
             ModelState.Remove("Quantidade");
             if (ModelState.IsValid)
             {
+                //Verifica se a Nota Fiscal existe no Banco
+                if (_nfeDal.ExisteNota(dadosProduto.IdNfe) == false)
+                {
+                    return RedirectToAction("GerenciaProduto");
+                }
+
                 //Verificar se há arquivos.
                 if (planilhas[0] != null)
                 {
@@ -162,6 +217,7 @@ namespace Eletrobid.Controllers
 
                                             dadosInsercao.IdEmpresaFornecedora = dadosProduto.IdEmpresaFornecedora;
                                             dadosInsercao.IdTipoProduto = dadosProduto.IdTipoProduto;
+                                            dadosInsercao.IdNfe = dadosProduto.IdNfe;
                                             dadosInsercao.CodigoItem = dadosLinha[0].ToString();
                                             dadosInsercao.Nome = dadosLinha[1].ToString();
                                             dadosInsercao.Quantidade = Convert.ToInt32(dadosLinha[2].ToString());
@@ -202,7 +258,6 @@ namespace Eletrobid.Controllers
 
                                     }//Fim do ELSE das verificações de linhas nulas
                                 }
-
                             }//Fim do IF da verificação de número de colunas
 
                             else
@@ -211,7 +266,6 @@ namespace Eletrobid.Controllers
                                 numeroErros++;
                                 listaErros.Add(erro);
                             }//Fim do ELSE da verificação de número de colunas
-
 
                         }//Fim do IF da verificação de extensão do arquivo
 
@@ -222,10 +276,13 @@ namespace Eletrobid.Controllers
                             listaErros.Add(erro);
 
                         }//Fim do ELSE da verificação de extensão do arquivo
+
                     }
 
+                    //Atualizar Quantidade de produtos da Nfe
+                    _nfeDal.AtualizaQtde(dadosProduto.IdNfe);
                     TempData["listaErros"] = listaErros;
-                    return RedirectToAction("ResultadoLeitura", new { numeroErros = numeroErros, numeroLinhasCorretas = numeroLinhasCorretas, numeroProdutosAdicionados = numeroProdutosAdicionados });
+                    return RedirectToAction("ResultadoLeitura", new { idNfe = dadosProduto.IdNfe, numeroErros = numeroErros, numeroLinhasCorretas = numeroLinhasCorretas, numeroProdutosAdicionados = numeroProdutosAdicionados });
 
                 }//Fim do IF para verificar se existe arquivos
                 else
@@ -238,16 +295,14 @@ namespace Eletrobid.Controllers
             return View(dadosProduto);
         }
 
-        public ActionResult ResultadoLeitura(int numeroErros, int numeroLinhasCorretas, int numeroProdutosAdicionados)
+        public ActionResult ResultadoLeitura(int idNfe, int numeroErros, int numeroLinhasCorretas, int numeroProdutosAdicionados)
         {
             var listaErros = (List<string>)TempData["listaErros"];
-            if (listaErros == null)
-            {
-                return RedirectToAction("InserirProdutos");
-            }
+
             ViewBag.NumeroErros = numeroErros;
             ViewBag.NumeroLinhasCorretas = numeroLinhasCorretas;
             ViewBag.NumeroProdutosAdicionados = numeroProdutosAdicionados;
+            ViewBag.idNfe = idNfe;
             return View();
         }
     }

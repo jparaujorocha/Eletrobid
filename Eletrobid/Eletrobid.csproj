@@ -247,6 +247,7 @@
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpostoController.cs" />
+    <Compile Include="Controllers\NfeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VendaController.cs" />
@@ -368,6 +369,11 @@
     <Content Include="Views\Produto\InserirProduto.cshtml" />
     <Content Include="Views\Produto\InserirProdutos.cshtml" />
     <Content Include="Views\Produto\ResultadoLeitura.cshtml" />
+    <Content Include="Views\Nfe\GerenciaNfe.cshtml" />
+    <Content Include="Views\Nfe\DetalhesNfe.cshtml" />
+    <Content Include="Views\Nfe\InserirProduto.cshtml" />
+    <Content Include="Views\Nfe\InserirProdutos.cshtml" />
+    <Content Include="Views\Nfe\ResultadoLeitura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

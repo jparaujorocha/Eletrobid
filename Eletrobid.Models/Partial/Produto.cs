@@ -35,5 +35,8 @@ namespace Eletrobid.Models
         [Display(Name = "Tipo do Produto")]
         public int IdTipoProduto { get; set; }
 
+        [Display(Name = "Identificação da Nfe")]
+        public int IdNfe { get; set; }
+
     }
 }

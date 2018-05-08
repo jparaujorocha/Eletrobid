@@ -34,6 +34,7 @@
         <AssociationConnector Association="EletrobidModel.FK_PRODUTO_REFERENCE_TIPOPROD" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_ProdutoLote_Produto" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_Venda_Produto" ManuallyRouted="false" />
+        <AssociationConnector Association="EletrobidModel.FK_Produto_Nfe" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

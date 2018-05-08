@@ -14,8 +14,12 @@ namespace Eletrobid.Dal
         Nfe GetNfe(string chaveDeAcesso);
         Nfe InserirNota(Nfe dadosNota);
         Nfe EditarNota(Nfe dadosNota);
-        IEnumerable<Nfe> ListaNotasCpf(string cpf);
         IEnumerable<Nfe> ListaNotasEntrada();
+        IEnumerable<Nfe> ListaNotas();
+        IEnumerable<Nfe> ListaNotasCpf(string cpf);
         IEnumerable<Nfe> ListaNotasCnpj(string cnpj);
+        IEnumerable<TipoNotaFiscal> ListaTipoNfe();
+        bool ExisteNota(int idNfe);
+        void AtualizaQtde(int idNfe);
     }
 }

@@ -14,6 +14,12 @@ namespace Eletrobid.Models
     
     public partial class Nfe
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Nfe()
+        {
+            this.Produto = new HashSet<Produto>();
+        }
+    
         public int IdNfe { get; set; }
         public int NumeroNota { get; set; }
         public string DestinatarioNota { get; set; }
@@ -26,5 +32,7 @@ namespace Eletrobid.Models
         public int QtdeProdutos { get; set; }
     
         public virtual TipoNotaFiscal TipoNotaFiscal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto> Produto { get; set; }
     }
 }

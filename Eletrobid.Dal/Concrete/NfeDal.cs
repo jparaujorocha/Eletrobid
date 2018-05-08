@@ -49,7 +49,7 @@ namespace Eletrobid.Dal.Concrete
         {
             var dadosNota = (from c in _dbContext.Nfe select c).OrderByDescending(c => c.NumeroNota).FirstOrDefault();
 
-            if(dadosNota == null)
+            if (dadosNota == null)
             {
                 return 0;
             }
@@ -70,6 +70,11 @@ namespace Eletrobid.Dal.Concrete
             return getDadosNota;
         }
 
+        public IEnumerable<TipoNotaFiscal> ListaTipoNfe()
+        {
+            return (from c in _dbContext.TipoNotaFiscal select c).ToList();
+        }
+
         public IEnumerable<Nfe> ListaNotasCnpj(string cnpj)
         {
             return (from c in _dbContext.Nfe where c.CnpjDestinatario == cnpj select c).ToList();
@@ -80,9 +85,26 @@ namespace Eletrobid.Dal.Concrete
             return (from c in _dbContext.Nfe where c.IdTipoNotaFiscal == 4 select c).ToList();
         }
 
+        public IEnumerable<Nfe> ListaNotas()
+        {
+            return (from c in _dbContext.Nfe select c).ToList();
+        }
         public IEnumerable<Nfe> ListaNotasCpf(string cpf)
         {
             return (from c in _dbContext.Nfe where c.CpfDestinatario == cpf select c).ToList();
+        }
+
+        public bool ExisteNota(int idNfe)
+        {
+            return (from c in _dbContext.Nfe where c.IdNfe == idNfe select c).Any();
+        }
+
+        public void AtualizaQtde(int idNfe)
+        {
+            var dadosNota = GetNfe(idNfe);
+            int novaQntde = dadosNota.Produto.Sum(c => c.Quantidade);
+            dadosNota.QtdeProdutos = novaQntde;
+            EditarNota(dadosNota);
         }
     }
 }

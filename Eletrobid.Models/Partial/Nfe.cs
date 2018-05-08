@@ -14,7 +14,7 @@ namespace Eletrobid.Models
     }
     public class NfeMetadata
     {
-        [Display(Name = "NumeroNota")]
+        [Display(Name = "Numero da Nota")]
         public int NumeroNota { get; set; }
 
         [Display(Name = "Destinatário")]
@@ -23,16 +23,22 @@ namespace Eletrobid.Models
         [Display(Name = "Chave de acesso")]
         public string ChaveAcesso { get; set; }
 
+        [Display(Name = "Data de Emissão")]
         public DateTime DataEmissao { get; set; }
 
+        [Display(Name = "Valor")]
         public double Valor { get; set; }
 
+        [Display(Name = "CPF Destinatario")]
         public string CpfDestinatario { get; set; }
 
+        [Display(Name = "CNPJ Destinatario")]
         public string CnpjDestinatario { get; set; }
 
+        [Display(Name = "Tipo")]
         public int IdTipoNotaFiscal { get; set; }
 
+        [Display(Name = "Quantidade de Produtos")]
         public int QtdeProdutos { get; set; }
     }
 }

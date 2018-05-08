@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Resultado da Leitura";
+
+    List<string> listaErros = (List<string>)TempData["listaErros"];
+    int numeroErros = (int)ViewBag.NumeroErros;
+    int numeroLinhasCorretas = (int)ViewBag.NumeroLinhasCorretas;
+    int idNfe = (int)ViewBag.idNfe;
+    int numeroProdutosAdicionados = (int)ViewBag.NumeroProdutosAdicionados;
+}
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading text-center">Upload finalizado!</h4>
+    <h6 class="text-center">Confira as informações abaixo</h6>
+
+    @if (listaErros.Count > 0 && listaErros != null)
+    {
+        <p class="text">Total de Linhas Corretas: <strong>@numeroLinhasCorretas</strong></p>
+        <p class="text">Total de Produtos Adicionados: <strong>@numeroProdutosAdicionados</strong></p>
+        <p class="text-danger">Total de Erros Encontrados: <strong>@numeroErros</strong></p>
+
+        <p>Seus Arquivos contém os seguintes erros:</p>
+
+        for (int a = 0; a < listaErros.Count; a++)
+        {
+            <hr>
+            <p class="text-danger">@listaErros[a]</p>
+        }
+    }
+    else
+    {
+        <p class="text">Total de Linhas Corretas: <strong>@numeroLinhasCorretas</strong></p><br />
+        <p class="text">Total de Produtos Adicionados: <strong>@numeroProdutosAdicionados</strong></p><br />
+        <p>Seus Arquivos foram lidos sem erros!</p>
+    }
+
+    <div class="text-center">
+        <div class="text-center">
+            @Html.ActionLink("Voltar", "DetalhesNfe", new { idNfe = idNfe }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+
