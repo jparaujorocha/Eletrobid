@@ -11,10 +11,13 @@ namespace Eletrobid.Dal
     {
         Nfe GetNfe(int idNfe);
         int GetNumeroUltimaNfe();
+        int GetQuantidadeRemessaProduto(int idProduto);
         Nfe GetNfe(string chaveDeAcesso);
         Nfe InserirNota(Nfe dadosNota);
         Nfe EditarNota(Nfe dadosNota);
         IEnumerable<Nfe> ListaNotasEntrada();
+        IEnumerable<Nfe> ListaNotasRemessa();
+        IEnumerable<Remessa> GetRemessa(int? idNfeRemessa, int? idProduto, int? idEmpresaRecebedora);
         IEnumerable<Nfe> ListaNotas();
         IEnumerable<Nfe> ListaNotasCpf(string cpf);
         IEnumerable<Nfe> ListaNotasCnpj(string cnpj);

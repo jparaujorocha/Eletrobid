@@ -54,6 +54,15 @@ namespace Eletrobid.Dal.Concrete
 
         }
 
+        IEnumerable<Cidade> ICidadeDal.ListaCidades()
+        {
+            return (from c in _dbContext.Cidade select c).ToList();
+        }
+        IEnumerable<Cidade> ICidadeDal.ListaCidades(int idEstado)
+        {
+            return (from c in _dbContext.Cidade where c.EstadoId == idEstado select c).ToList();
+        }
+
         public string getCodigoIbge(string nome)
         {
             var cidade = (from c in _dbContext.Cidade where c.Nome == nome select c).FirstOrDefault();

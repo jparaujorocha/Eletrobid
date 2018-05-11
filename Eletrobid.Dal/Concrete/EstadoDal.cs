@@ -1,5 +1,4 @@
-﻿using Eletrobid.Dal.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +41,11 @@ namespace Eletrobid.Dal.Concrete
             {
                 return null;
             }
+        }
+
+        public IEnumerable<Estado> ListaEstados()
+        {
+            return (from c in _dbContext.Estado select c).ToList();
         }
 
         public string getCodigoIbge(string sigla)

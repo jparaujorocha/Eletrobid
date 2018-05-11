@@ -18,6 +18,7 @@ namespace Eletrobid.Models
         public Nfe()
         {
             this.Produto = new HashSet<Produto>();
+            this.Remessa = new HashSet<Remessa>();
         }
     
         public int IdNfe { get; set; }
@@ -34,5 +35,7 @@ namespace Eletrobid.Models
         public virtual TipoNotaFiscal TipoNotaFiscal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produto> Produto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remessa> Remessa { get; set; }
     }
 }

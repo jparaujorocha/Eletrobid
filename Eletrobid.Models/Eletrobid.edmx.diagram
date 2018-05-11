@@ -35,6 +35,10 @@
         <AssociationConnector Association="EletrobidModel.FK_ProdutoLote_Produto" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_Venda_Produto" ManuallyRouted="false" />
         <AssociationConnector Association="EletrobidModel.FK_Produto_Nfe" />
+        <EntityTypeShape EntityType="EletrobidModel.Remessa" Width="1.5" PointX="14.25" PointY="1.875" />
+        <AssociationConnector Association="EletrobidModel.FK_Remessa_Empresa" />
+        <AssociationConnector Association="EletrobidModel.FK_Remessa_Nfe" />
+        <AssociationConnector Association="EletrobidModel.FK_Remessa_Produto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

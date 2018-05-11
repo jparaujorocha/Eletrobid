@@ -19,11 +19,14 @@ namespace Eletrobid.Controllers
         private readonly ITipoProdutoDal _tipoProduto;
         private readonly IVendaDal _vendaDal;
         private readonly INfeDal _nfeDal;
+        private readonly IEstadoDal _estadoDal;
+        private readonly ICidadeDal _cidadeDal;
+
         // GET: Nfe
 
         private readonly string caminhoAddProdutos = @"C:\Users\joaopedro\Desktop\BDL\Produtos_Adicionados\";
 
-        public NfeController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal, INfeDal nfeDal)
+        public NfeController(IProdutoDal produtoDal, IImpostoDal impostoDal, IImpostoProdutoDal impostoProdutoDal, ITipoProdutoDal tipoProduto, IVendaDal vendaDal, IEmpresaDal empresaDal, INfeDal nfeDal, IEstadoDal estadoDal, ICidadeDal cidadeDal)
         {
             _produtoDal = produtoDal;
             _impostoDal = impostoDal;
@@ -32,22 +35,17 @@ namespace Eletrobid.Controllers
             _vendaDal = vendaDal;
             _empresaDal = empresaDal;
             _nfeDal = nfeDal;
+            _estadoDal = estadoDal;
+            _cidadeDal = cidadeDal;
         }
 
         public ActionResult Index()
         {
             return View();
         }
-
+        #region Métodos Relacionados à NFE
         public ActionResult GerenciaNfe()
         {
-            Produto dadosProduto = new Produto();
-            var listaTipoNfe = new SelectList(_nfeDal.ListaTipoNfe(), "IdTipoNotaFiscal", "Nome");
-            var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
-
-            ViewBag.ListaTipoNfe = listaTipoNfe;
-            ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
-
             var notas = _nfeDal.ListaNotas();
             return View(notas);
         }
@@ -66,6 +64,28 @@ namespace Eletrobid.Controllers
             }
         }
 
+        public ActionResult InserirNota()
+        {
+            var listaTipoNfe = new SelectList(_nfeDal.ListaTipoNfe(), "IdTipoNotaFiscal", "Nome");
+            var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
+            var listaEstado = new SelectList(_estadoDal.ListaEstados(), "EstadoId", "Sigla");
+            var listaCidade = new SelectList(_cidadeDal.ListaCidades(), "CidadeId", "Nome");
+            var listaProdutos = (from c in _produtoDal.ListaProdutos() where c.Quantidade - _nfeDal.GetQuantidadeRemessaProduto(c.IdProduto) > 0 select new { IdProduto = c.IdProduto, Nome = c.Nome }).ToList();
+            Nfe dadosNfe = new Nfe();
+
+            ViewBag.ListaTipoNfe = listaTipoNfe;
+            ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
+            ViewBag.ListaEstados = listaEstado;
+            ViewBag.ListaCidades = listaCidade;
+            ViewBag.ListaCidades = listaProdutos;
+            ViewBag.ListaProdutos = listaProdutos;
+
+            return View(dadosNfe);
+        }
+        #endregion
+
+
+        #region MÉTODOS PARA INSERÇÃO DE PRODUTOS NA NFE
         public ActionResult InserirProduto(int idNfe)
         {
             var listaTipoProduto = new SelectList(_tipoProduto.ListaTipoProduto(), "IdTipoProduto", "Nome");
@@ -305,5 +325,6 @@ namespace Eletrobid.Controllers
             ViewBag.idNfe = idNfe;
             return View();
         }
+        #endregion 
     }
 }

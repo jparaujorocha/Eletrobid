@@ -259,6 +259,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NfeViewModels.cs" />
+    <Compile Include="Models\ProdutoRemessa.cs" />
     <Compile Include="Plumbing\WindsonControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -374,11 +376,13 @@
     <Content Include="Views\Nfe\InserirProduto.cshtml" />
     <Content Include="Views\Nfe\InserirProdutos.cshtml" />
     <Content Include="Views\Nfe\ResultadoLeitura.cshtml" />
+    <Content Include="Views\Nfe\InserirNota.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Empresa\" />
     <Folder Include="Views\Imposto\" />
+    <Folder Include="Views\NotaFiscal\" />
     <Folder Include="Views\Usuario\" />
     <Folder Include="Views\Venda\" />
   </ItemGroup>

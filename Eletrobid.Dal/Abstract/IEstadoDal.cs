@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eletrobid.Dal.Abstract
+namespace Eletrobid.Dal
 {
     public interface IEstadoDal : IDisposable
     {
@@ -13,5 +13,6 @@ namespace Eletrobid.Dal.Abstract
         Estado getEstado(string sigla);
         string getCodigoIbge(string sigla);
         string getCodigoIbge(int idEstado);
+        IEnumerable<Estado> ListaEstados();
     }
 }

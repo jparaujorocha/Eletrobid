@@ -13,5 +13,7 @@ namespace Eletrobid.Dal
         Cidade getCidade(string nome);
         string getCodigoIbge(string nome);
         string getCodigoIbge(int idCidade);
+        IEnumerable<Cidade> ListaCidades();
+        IEnumerable<Cidade> ListaCidades(int idEstado);
     }
 }

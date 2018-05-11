@@ -1,5 +1,4 @@
-﻿using Eletrobid.Dal.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +57,11 @@ namespace Eletrobid.Dal.Concrete
                 return dadosNota.NumeroNota;
             }
         }
+
+        public int GetQuantidadeRemessaProduto(int idProduto)
+        {
+            return (from c in _dbContext.Remessa where c.IdProduto == idProduto select c).Count();
+        }
         public Nfe GetNfe(int idNfe)
         {
             return (from c in _dbContext.Nfe where c.IdNfe == idNfe select c).FirstOrDefault();
@@ -85,6 +89,31 @@ namespace Eletrobid.Dal.Concrete
             return (from c in _dbContext.Nfe where c.IdTipoNotaFiscal == 4 select c).ToList();
         }
 
+        public IEnumerable<Nfe> ListaNotasRemessa()
+        {
+            return (from c in _dbContext.Nfe where c.IdTipoNotaFiscal == 2 select c).ToList();
+        }
+
+        public IEnumerable<Remessa> GetRemessa(int? idNfeRemessa, int? idProduto, int? idEmpresaRecebedora)
+        {
+            if (idNfeRemessa != null)
+            {
+                return (from c in _dbContext.Remessa where c.IdNfeRemessa == idNfeRemessa select c).ToList();
+            }
+            else if(idProduto != null)
+            {
+                return (from c in _dbContext.Remessa where c.IdProduto == idProduto select c).ToList();
+            }
+            else if(idEmpresaRecebedora != null)
+            {
+                return (from c in _dbContext.Remessa where c.IdEmpresaRecebedora == idEmpresaRecebedora select c).ToList();
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         public IEnumerable<Nfe> ListaNotas()
         {
             return (from c in _dbContext.Nfe select c).ToList();

@@ -20,6 +20,7 @@ namespace Eletrobid.Models
             this.Produto = new HashSet<Produto>();
             this.ProdutoLote = new HashSet<ProdutoLote>();
             this.Venda = new HashSet<Venda>();
+            this.Remessa = new HashSet<Remessa>();
         }
     
         public int IdEmpresa { get; set; }
@@ -41,5 +42,7 @@ namespace Eletrobid.Models
         public virtual ICollection<ProdutoLote> ProdutoLote { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Venda> Venda { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remessa> Remessa { get; set; }
     }
 }

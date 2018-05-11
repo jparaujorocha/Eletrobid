@@ -107,6 +107,15 @@
           <Property Name="ValorMinimoUniVenda" Type="float" Nullable="false" />
           <Property Name="IdEmpresaRevendedora" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Remessa">
+          <Key>
+            <PropertyRef Name="IdRemessa" />
+          </Key>
+          <Property Name="IdRemessa" Type="int" Nullable="false" />
+          <Property Name="IdProduto" Type="int" Nullable="false" />
+          <Property Name="IdEmpresaRecebedora" Type="int" Nullable="false" />
+          <Property Name="IdNfeRemessa" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoEmpresa">
           <Key>
             <PropertyRef Name="IdTipoEmpresa" />
@@ -309,6 +318,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Remessa_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="Remessa" Type="Self.Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdEmpresaRecebedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Remessa_Nfe">
+          <End Role="Nfe" Type="Self.Nfe" Multiplicity="1" />
+          <End Role="Remessa" Type="Self.Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nfe">
+              <PropertyRef Name="IdNfe" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdNfeRemessa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Remessa_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Remessa" Type="Self.Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USUARIO_REFERENCE_PERFIL">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -355,6 +400,7 @@
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProdutoLote" EntityType="Self.ProdutoLote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Remessa" EntityType="Self.Remessa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoEmpresa" EntityType="Self.TipoEmpresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoImposto" EntityType="Self.TipoImposto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoNotaFiscal" EntityType="Self.TipoNotaFiscal" Schema="dbo" store:Type="Tables" />
@@ -409,6 +455,18 @@
             <End Role="Produto" EntitySet="Produto" />
             <End Role="ProdutoLote" EntitySet="ProdutoLote" />
           </AssociationSet>
+          <AssociationSet Name="FK_Remessa_Empresa" Association="Self.FK_Remessa_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Remessa_Nfe" Association="Self.FK_Remessa_Nfe">
+            <End Role="Nfe" EntitySet="Nfe" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Remessa_Produto" Association="Self.FK_Remessa_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
           <AssociationSet Name="FK_USUARIO_REFERENCE_PERFIL" Association="Self.FK_USUARIO_REFERENCE_PERFIL">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -456,6 +514,7 @@
           <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_EmpresaFornecedora" FromRole="Empresa" ToRole="Produto" />
           <NavigationProperty Name="ProdutoLote" Relationship="Self.FK_ProdutoLote_EmpresaRevendedora" FromRole="Empresa" ToRole="ProdutoLote" />
           <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_EmpresaRevendedora" FromRole="Empresa" ToRole="Venda" />
+          <NavigationProperty Name="Remessa" Relationship="EletrobidModel.FK_Remessa_Empresa" FromRole="Empresa" ToRole="Remessa" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -507,6 +566,7 @@
           <NavigationProperty Name="TipoNotaFiscal" Relationship="Self.FK_Nfe_TipoNotaFiscal" FromRole="Nfe" ToRole="TipoNotaFiscal" />
           <Property Name="QtdeProdutos" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Produto" Relationship="EletrobidModel.FK_Produto_Nfe" FromRole="Nfe" ToRole="Produto" />
+          <NavigationProperty Name="Remessa" Relationship="EletrobidModel.FK_Remessa_Nfe" FromRole="Nfe" ToRole="Remessa" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -537,6 +597,7 @@
           <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_Produto" FromRole="Produto" ToRole="Venda" />
           <Property Name="IdNfe" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Nfe" Relationship="EletrobidModel.FK_Produto_Nfe" FromRole="Produto" ToRole="Nfe" />
+          <NavigationProperty Name="Remessa" Relationship="EletrobidModel.FK_Remessa_Produto" FromRole="Produto" ToRole="Remessa" />
         </EntityType>
         <EntityType Name="ProdutoLote">
           <Key>
@@ -860,6 +921,19 @@
             <End Role="Nfe" EntitySet="Nfe" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
+          <EntitySet Name="Remessa" EntityType="EletrobidModel.Remessa" />
+          <AssociationSet Name="FK_Remessa_Empresa" Association="EletrobidModel.FK_Remessa_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Remessa_Nfe" Association="EletrobidModel.FK_Remessa_Nfe">
+            <End Role="Nfe" EntitySet="Nfe" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Remessa_Produto" Association="EletrobidModel.FK_Remessa_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Remessa" EntitySet="Remessa" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Produto_Nfe">
           <End Type="EletrobidModel.Nfe" Role="Nfe" Multiplicity="1" />
@@ -870,6 +944,54 @@
             </Principal>
             <Dependent Role="Produto">
               <PropertyRef Name="IdNfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Remessa">
+          <Key>
+            <PropertyRef Name="IdRemessa" />
+          </Key>
+          <Property Name="IdRemessa" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresaRecebedora" Type="Int32" Nullable="false" />
+          <Property Name="IdNfeRemessa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empresa" Relationship="EletrobidModel.FK_Remessa_Empresa" FromRole="Remessa" ToRole="Empresa" />
+          <NavigationProperty Name="Nfe" Relationship="EletrobidModel.FK_Remessa_Nfe" FromRole="Remessa" ToRole="Nfe" />
+          <NavigationProperty Name="Produto" Relationship="EletrobidModel.FK_Remessa_Produto" FromRole="Remessa" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_Remessa_Empresa">
+          <End Type="EletrobidModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="EletrobidModel.Remessa" Role="Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdEmpresaRecebedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Remessa_Nfe">
+          <End Type="EletrobidModel.Nfe" Role="Nfe" Multiplicity="1" />
+          <End Type="EletrobidModel.Remessa" Role="Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nfe">
+              <PropertyRef Name="IdNfe" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdNfeRemessa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Remessa_Produto">
+          <End Type="EletrobidModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="EletrobidModel.Remessa" Role="Remessa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="Remessa">
+              <PropertyRef Name="IdProduto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1051,6 +1173,16 @@
                 <ScalarProperty Name="Cancelada" ColumnName="Cancelada" />
                 <ScalarProperty Name="DataCancelamento" ColumnName="DataCancelamento" />
                 <ScalarProperty Name="MotivoCancelamento" ColumnName="MotivoCancelamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Remessa">
+            <EntityTypeMapping TypeName="EletrobidModel.Remessa">
+              <MappingFragment StoreEntitySet="Remessa">
+                <ScalarProperty Name="IdNfeRemessa" ColumnName="IdNfeRemessa" />
+                <ScalarProperty Name="IdEmpresaRecebedora" ColumnName="IdEmpresaRecebedora" />
+                <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+                <ScalarProperty Name="IdRemessa" ColumnName="IdRemessa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
