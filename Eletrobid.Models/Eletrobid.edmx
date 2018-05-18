@@ -115,6 +115,7 @@
           <Property Name="IdProduto" Type="int" Nullable="false" />
           <Property Name="IdEmpresaRecebedora" Type="int" Nullable="false" />
           <Property Name="IdNfeRemessa" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoEmpresa">
           <Key>
@@ -958,6 +959,7 @@
           <NavigationProperty Name="Empresa" Relationship="EletrobidModel.FK_Remessa_Empresa" FromRole="Remessa" ToRole="Empresa" />
           <NavigationProperty Name="Nfe" Relationship="EletrobidModel.FK_Remessa_Nfe" FromRole="Remessa" ToRole="Nfe" />
           <NavigationProperty Name="Produto" Relationship="EletrobidModel.FK_Remessa_Produto" FromRole="Remessa" ToRole="Produto" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Remessa_Empresa">
           <End Type="EletrobidModel.Empresa" Role="Empresa" Multiplicity="1" />
@@ -1179,6 +1181,7 @@
           <EntitySetMapping Name="Remessa">
             <EntityTypeMapping TypeName="EletrobidModel.Remessa">
               <MappingFragment StoreEntitySet="Remessa">
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
                 <ScalarProperty Name="IdNfeRemessa" ColumnName="IdNfeRemessa" />
                 <ScalarProperty Name="IdEmpresaRecebedora" ColumnName="IdEmpresaRecebedora" />
                 <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />

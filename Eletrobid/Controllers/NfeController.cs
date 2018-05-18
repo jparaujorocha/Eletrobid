@@ -43,6 +43,10 @@ namespace Eletrobid.Controllers
         {
             return View();
         }
+        public ActionResult Teste()
+        {
+            return View();
+        }
         #region Métodos Relacionados à NFE
         public ActionResult GerenciaNfe()
         {
@@ -70,15 +74,15 @@ namespace Eletrobid.Controllers
             var listaEmpresaFornecedora = new SelectList(_empresaDal.ListaEmpresas(1), "IdEmpresa", "RazaoSocial");
             var listaEstado = new SelectList(_estadoDal.ListaEstados(), "EstadoId", "Sigla");
             var listaCidade = new SelectList(_cidadeDal.ListaCidades(), "CidadeId", "Nome");
-            var listaProdutos = (from c in _produtoDal.ListaProdutos() where c.Quantidade - _nfeDal.GetQuantidadeRemessaProduto(c.IdProduto) > 0 select new { IdProduto = c.IdProduto, Nome = c.Nome }).ToList();
-            Nfe dadosNfe = new Nfe();
+            int quantidadeProduto = 0;
+            
+            NfeViewModels dadosNfe = new NfeViewModels();
+            dadosNfe.ListaRemessa = (from c in _produtoDal.ListaProdutos() where ((quantidadeProduto = c.Quantidade - _nfeDal.GetQuantidadeRemessaProduto(c.IdProduto)) > 0) select new ProdutoRemessa { IdProduto = c.IdProduto, Nome = c.Nome, Quantidade = quantidadeProduto }).ToList();
 
             ViewBag.ListaTipoNfe = listaTipoNfe;
             ViewBag.ListEmpresaFornecedora = listaEmpresaFornecedora;
             ViewBag.ListaEstados = listaEstado;
             ViewBag.ListaCidades = listaCidade;
-            ViewBag.ListaCidades = listaProdutos;
-            ViewBag.ListaProdutos = listaProdutos;
 
             return View(dadosNfe);
         }

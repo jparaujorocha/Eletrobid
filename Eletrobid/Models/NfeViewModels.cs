@@ -33,7 +33,7 @@ namespace Eletrobid.Models
         [Display(Name = "Descricao Produtos"), Required(ErrorMessage = "Campo Obrigatório")]
         public string Descricao { get; set; }
 
-        [Display(Name = "Nome Cliente"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Nome do Cliente"), Required(ErrorMessage = "Campo Obrigatório")]
         public string NomeCliente { get; set; }
 
         [Display(Name = "Endereço"), Required(ErrorMessage = "Campo Obrigatório")]
@@ -67,6 +67,6 @@ namespace Eletrobid.Models
         public int QtdeProdutos { get; set; }
 
         [Display(Name = "Lista para remessa"), Required(ErrorMessage = "Campo Obrigatório")]
-        public List<Produto> ListaRemessa { get; set; }
+        public List<ProdutoRemessa> ListaRemessa { get; set; }
     }
 }

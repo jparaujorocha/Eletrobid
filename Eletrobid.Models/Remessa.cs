@@ -18,6 +18,7 @@ namespace Eletrobid.Models
         public int IdProduto { get; set; }
         public int IdEmpresaRecebedora { get; set; }
         public int IdNfeRemessa { get; set; }
+        public int Quantidade { get; set; }
     
         public virtual Empresa Empresa { get; set; }
         public virtual Nfe Nfe { get; set; }

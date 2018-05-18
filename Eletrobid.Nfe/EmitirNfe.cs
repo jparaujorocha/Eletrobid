@@ -36,7 +36,7 @@ namespace Eletrobid.Nfe
                     NfeDal dalNota = new NfeDal();
 
                     Console.WriteLine("Digite o caminho do arquivo");
-                    var caminhoArquivo = @"C:\Users\joaopedro\Desktop\BDL\Arremates_Eletrobid\RELATÓRIO ELETROBID FINAL 20-01-18.xlsx";
+                    var caminhoArquivo = @"C:\Users\joaopedro\Desktop\BDL\Arremates_Eletrobid\RELATÓRIO FINAL ELETROBID 11-03-17.xlsx";
                     Console.WriteLine("Digite o tipo de nota: 1 - Remessa - 2 - Venda");
                     int tipoNota = int.Parse(Console.ReadLine());
                     if (tipoNota == 1)
@@ -187,7 +187,7 @@ namespace Eletrobid.Nfe
                                     //GRUPO I - PRODUTOS E SERVIÇOS DA NFe
                                     escreverDados.AppendFormat(
                                         "I|CFOP{0}||PRODUTO SUCATEADO|00000000||{0}|UN|{1}|{2:0.0}|{3:0,00}||UN|{1}|{2:0.00}|||||1||1||\r\n",
-                                        cfop, Convert.ToDouble(dadosLinha[2]).ToString("N2").Replace(",", "."), valorUnitario.ToString("N2").Replace(",", "."), valorTotal.ToString("N2").Replace(",", "."));
+                                        cfop, Convert.ToDouble(dadosLinha[2]).ToString("N2").Replace(",", "."), valorUnitario.ToString("N2").Replace(".", "").Replace(",", "."), valorTotal.ToString("N2").Replace(".","").Replace(",", "."));
 
                                     //GRUPO M - TRIBUTOS INCIDENTES NO PRODUTO OU SERVIÇO
                                     escreverDados.Append("M|\r\n");
@@ -212,7 +212,7 @@ namespace Eletrobid.Nfe
 
                                     //GRUPO W - TOTAL DA NF-E
                                     escreverDados.Append("W|\r\n");
-                                    escreverDados.AppendFormat("W02|0.00|0.00|0.00|0.00|0.00|{0:0.00}|0.00|0.00|0.00|0.00|0.00|0.00|0.00|0.00|{0:0.00}|0|\r\n", valorTotal.ToString("N2").Replace(",", "."));
+                                    escreverDados.AppendFormat("W02|0.00|0.00|0.00|0.00|0.00|{0:0.00}|0.00|0.00|0.00|0.00|0.00|0.00|0.00|0.00|{0:0.00}|0|\r\n", valorTotal.ToString("N2").Replace(".", "").Replace(",", "."));
 
                                     //GRUPO X - INFORMAÇÕES DO TRANSPORTE DA NF-E
                                     escreverDados.AppendFormat("X|1|\r\n");
@@ -232,8 +232,20 @@ namespace Eletrobid.Nfe
                                     dadosNota.QtdeProdutos = Convert.ToInt32(dadosLinha[2].ToString());
 
                                     dalNota.InserirNota(dadosNota);
-                                }
-                            }//Fim do IF da Validação de CPF
+                                }//Fim do IF da Validação de CPF
+                                else
+                                {
+                                    //Criar txt com CPF Inválidos
+                                    if (!string.IsNullOrEmpty(dadosLinha[4].ToString()))
+                                    {
+                                        escreverCpfInvalidos.AppendFormat("Lote {0} CPF {1}|\r\n", dadosLinha[0].ToString(), dadosLinha[4].ToString());
+                                    }
+                                    else
+                                    {
+                                        escreverCpfInvalidos.AppendFormat("Lote {0}|\r\n", dadosLinha[0].ToString());
+                                    }
+                                }//Fim do ELSE da Validação de CPF
+                            }
 
                             else
                             {

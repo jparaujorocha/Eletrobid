@@ -60,7 +60,15 @@ namespace Eletrobid.Dal.Concrete
 
         public int GetQuantidadeRemessaProduto(int idProduto)
         {
-            return (from c in _dbContext.Remessa where c.IdProduto == idProduto select c).Count();
+            var listaProduto = (from c in _dbContext.Remessa where c.IdProduto == idProduto select c).ToList();
+            if(listaProduto != null && listaProduto.Count() > 0)
+            {
+                return listaProduto.Sum(c => c.Quantidade);
+            }
+            else
+            {
+                return 0;
+            }
         }
         public Nfe GetNfe(int idNfe)
         {

@@ -258,6 +258,7 @@
     <Compile Include="LoggedUserModelBinder.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ListaProdutoModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NfeViewModels.cs" />
     <Compile Include="Models\ProdutoRemessa.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Views\Nfe\InserirProdutos.cshtml" />
     <Content Include="Views\Nfe\ResultadoLeitura.cshtml" />
     <Content Include="Views\Nfe\InserirNota.cshtml" />
+    <Content Include="Views\Nfe\Teste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
