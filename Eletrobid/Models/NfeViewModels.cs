@@ -9,64 +9,79 @@ namespace Eletrobid.Models
     {
 
 
-        [Display(Name = "Numero da Nota"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Numero da Nota")]
         public int NumeroNota { get; set; }
 
         [Display(Name = "Destinatário")]
         public string DestinatarioNota { get; set; }
 
-        [Display(Name = "Chave de acesso"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Nome do Remetente")]
+        public string RemetenteNota { get; set; }
+
+        [Display(Name = "Chave de acesso")]
         public string ChaveAcesso { get; set; }
 
-        [Display(Name = "Data de Emissão"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Data de Emissão")]
         public DateTime DataEmissao { get; set; }
 
-        [Display(Name = "Valor"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Valor")]
         public double Valor { get; set; }
 
-        [Display(Name = "CPF Destinatario"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "CPF Destinatario")]
         public string CpfDestinatario { get; set; }
 
-        [Display(Name = "CNPJ Destinatario"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "CNPJ Destinatario")]
         public string CnpjDestinatario { get; set; }
 
-        [Display(Name = "Descricao Produtos"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "CPF Remetente")]
+        public string CpfRemetente{ get; set; }
+
+        [Display(Name = "CNPJ Remetente")]
+        public string CnpjRemetente { get; set; }
+
+        [Display(Name = "Descricao Produtos")]
         public string Descricao { get; set; }
 
-        [Display(Name = "Nome do Cliente"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Nome do Cliente")]
         public string NomeCliente { get; set; }
 
-        [Display(Name = "Endereço"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Endereço")]
         public string Endereco { get; set; }
 
-        [Display(Name = "Numero"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Numero")]
         public int Numero { get; set; }
 
         [Display(Name = "Complemento")]
         public string Complemento { get; set; }
 
-        [Display(Name = "Bairro"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Bairro")]
         public string Bairro { get; set; }
 
-        [Display(Name = "CEP"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "CEP")]
         public string Cep { get; set; }
 
-        [Display(Name = "Cidade"), Required(ErrorMessage = "Campo Obrigatório")]
-        public string IdCidade { get; set; }
+        [Display(Name = "Cidade")]
+        public int IdCidade { get; set; }
 
-        [Display(Name = "Estado"), Required(ErrorMessage = "Campo Obrigatório")]
-        public string IdEstado { get; set; }
+        [Display(Name = "Estado")]
+        public int IdEstado { get; set; }
 
-        [Display(Name = "CPF"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Estado")]
+        public string SiglaEstado { get; set; }
+
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        [Display(Name = "CPF")]
         public string Cpf { get; set; }
 
-        [Display(Name = "Tipo"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Tipo")]
         public int IdTipoNotaFiscal { get; set; }
 
-        [Display(Name = "Quantidade de Produtos"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Quantidade de Produtos")]
         public int QtdeProdutos { get; set; }
 
-        [Display(Name = "Lista para remessa"), Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Lista para remessa")]
         public List<ProdutoRemessa> ListaRemessa { get; set; }
     }
 }

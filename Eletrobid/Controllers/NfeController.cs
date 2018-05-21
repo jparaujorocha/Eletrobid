@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Eletrobid.Models;
 using ExcelDataReader;
 using System.IO;
+using System.Text;
+using Eletrobid.Auxiliar;
 
 namespace Eletrobid.Controllers
 {
@@ -75,7 +77,7 @@ namespace Eletrobid.Controllers
             var listaEstado = new SelectList(_estadoDal.ListaEstados(), "EstadoId", "Sigla");
             var listaCidade = new SelectList(_cidadeDal.ListaCidades(), "CidadeId", "Nome");
             int quantidadeProduto = 0;
-            
+
             NfeViewModels dadosNfe = new NfeViewModels();
             dadosNfe.ListaRemessa = (from c in _produtoDal.ListaProdutos() where ((quantidadeProduto = c.Quantidade - _nfeDal.GetQuantidadeRemessaProduto(c.IdProduto)) > 0) select new ProdutoRemessa { IdProduto = c.IdProduto, Nome = c.Nome, Quantidade = quantidadeProduto }).ToList();
 
@@ -86,6 +88,70 @@ namespace Eletrobid.Controllers
 
             return View(dadosNfe);
         }
+
+        public ActionResult InserirNota(NfeViewModels dadosNfe)
+        {
+            #region Trata nota do tipo venda
+            if (dadosNfe.IdTipoNotaFiscal == 1)
+            {
+                if (!string.IsNullOrEmpty(dadosNfe.NomeCliente) && !string.IsNullOrWhiteSpace(dadosNfe.NomeCliente) && !string.IsNullOrEmpty(dadosNfe.CpfDestinatario) && !string.IsNullOrWhiteSpace(dadosNfe.CpfDestinatario) && !string.IsNullOrEmpty(dadosNfe.Endereco) && !string.IsNullOrWhiteSpace(dadosNfe.Endereco) && !string.IsNullOrEmpty(dadosNfe.Bairro) && !string.IsNullOrWhiteSpace(dadosNfe.Bairro) && !string.IsNullOrEmpty(dadosNfe.Cep) && !string.IsNullOrWhiteSpace(dadosNfe.Cep) && !string.IsNullOrEmpty(dadosNfe.Descricao) && !string.IsNullOrWhiteSpace(dadosNfe.Descricao))
+                {
+                    NfeVenda criarTxt = new NfeVenda();
+                    Estado dadosEstado = _estadoDal.getEstado(dadosNfe.IdEstado);
+                    Cidade dadosCidade = _cidadeDal.getCidade(dadosNfe.IdCidade);
+                    dadosNfe.SiglaEstado = dadosEstado.Sigla;
+                    dadosNfe.Cidade = dadosCidade.Nome;
+                    int ultimaNota = _nfeDal.GetNumeroUltimaNfe();
+
+                    Nfe dadosNota = criarTxt.emitirTxtNfe(dadosNfe, dadosNfe.SiglaEstado, dadosNfe.Cidade, ultimaNota);
+
+                    if (dadosNota != null)
+                    {
+                        dadosNota.CpfDestinatario = dadosNfe.CpfDestinatario.ToString().Replace(",", "").Replace(".", "").Replace("-", "").Replace(" ", "");
+                        dadosNota.DestinatarioNota = dadosNfe.DestinatarioNota.ToString();
+                        dadosNota.IdTipoNotaFiscal = 1;
+                        dadosNota.Valor = Convert.ToDouble(dadosNfe.Valor.ToString().Replace(",", "."));
+                        dadosNota.QtdeProdutos = Convert.ToInt32(dadosNfe.QtdeProdutos.ToString());
+
+                        _nfeDal.InserirNota(dadosNota);
+
+                        return RedirectToAction("GerenciaNfe");
+                    }
+                    else
+                    {
+                        return View(dadosNfe);
+                    }
+                }
+                else
+                {
+                    return View(dadosNfe);
+                }
+            }
+            #endregion
+            #region Trata nota do tipo Remessa
+            else if (dadosNfe.IdTipoNotaFiscal == 2)
+            {
+                return View(dadosNfe);
+            }
+            #endregion
+            #region Trata nota do tipo Retorno
+            else if (dadosNfe.IdTipoNotaFiscal == 3)
+            {
+                return View(dadosNfe);
+            }
+            #endregion
+            #region Trata nota do tipo Entrada
+            else if (dadosNfe.IdTipoNotaFiscal == 4)
+            {
+                return View(dadosNfe);
+            }
+            #endregion
+            else
+            {
+                return View(dadosNfe);
+            }
+        }
+
         #endregion
 
 
