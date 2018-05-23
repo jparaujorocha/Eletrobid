@@ -39,6 +39,8 @@
         <AssociationConnector Association="EletrobidModel.FK_Remessa_Empresa" />
         <AssociationConnector Association="EletrobidModel.FK_Remessa_Nfe" />
         <AssociationConnector Association="EletrobidModel.FK_Remessa_Produto" />
+        <AssociationConnector Association="EletrobidModel.FK_Empresa_Cidade" />
+        <AssociationConnector Association="EletrobidModel.FK_Empresa_Estado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

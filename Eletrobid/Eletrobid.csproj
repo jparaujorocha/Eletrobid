@@ -380,10 +380,11 @@
     <Content Include="Views\Nfe\ResultadoLeitura.cshtml" />
     <Content Include="Views\Nfe\InserirNota.cshtml" />
     <Content Include="Views\Nfe\Teste.cshtml" />
+    <Content Include="Views\Empresa\GerenciaEmpresas.cshtml" />
+    <Content Include="Views\Empresa\DetalhesEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Empresa\" />
     <Folder Include="Views\Imposto\" />
     <Folder Include="Views\NotaFiscal\" />
     <Folder Include="Views\Usuario\" />

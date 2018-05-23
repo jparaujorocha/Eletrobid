@@ -30,6 +30,11 @@
           <Property Name="Cep" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="EmpresaLeiloeira" Type="bit" Nullable="false" />
           <Property Name="IdTipoEmpresa" Type="int" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Complemento" Type="varchar" MaxLength="50" />
+          <Property Name="EstadoId" Type="tinyint" Nullable="false" />
+          <Property Name="CidadeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -74,6 +79,9 @@
           <Property Name="CnpjDestinatario" Type="varchar" MaxLength="255" />
           <Property Name="IdTipoNotaFiscal" Type="int" Nullable="false" />
           <Property Name="QtdeProdutos" Type="int" Nullable="false" />
+          <Property Name="RemetenteNota" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CpfRemetente" Type="varchar" MaxLength="12" />
+          <Property Name="CnpjRemetente" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -183,6 +191,30 @@
               <PropertyRef Name="EstadoId" />
             </Principal>
             <Dependent Role="Cidade">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoId" />
+            </Principal>
+            <Dependent Role="Empresa">
               <PropertyRef Name="EstadoId" />
             </Dependent>
           </ReferentialConstraint>
@@ -412,6 +444,14 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Cidade" EntitySet="Cidade" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Cidade" Association="Self.FK_Empresa_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Estado" Association="Self.FK_Empresa_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
           <AssociationSet Name="FK_Empresa_TipoEmpresa" Association="Self.FK_Empresa_TipoEmpresa">
             <End Role="TipoEmpresa" EntitySet="TipoEmpresa" />
             <End Role="Empresa" EntitySet="Empresa" />
@@ -495,6 +535,7 @@
           <Property Name="Capital" Type="Boolean" Nullable="false" />
           <Property Name="CodigoIbge" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Cidade_Estado" FromRole="Cidade" ToRole="Estado" />
+          <NavigationProperty Name="Empresa" Relationship="EletrobidModel.FK_Empresa_Cidade" FromRole="Cidade" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Empresa">
           <Key>
@@ -516,6 +557,13 @@
           <NavigationProperty Name="ProdutoLote" Relationship="Self.FK_ProdutoLote_EmpresaRevendedora" FromRole="Empresa" ToRole="ProdutoLote" />
           <NavigationProperty Name="Venda" Relationship="Self.FK_Venda_EmpresaRevendedora" FromRole="Empresa" ToRole="Venda" />
           <NavigationProperty Name="Remessa" Relationship="EletrobidModel.FK_Remessa_Empresa" FromRole="Empresa" ToRole="Remessa" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoId" Type="Byte" Nullable="false" />
+          <Property Name="CidadeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cidade" Relationship="EletrobidModel.FK_Empresa_Cidade" FromRole="Empresa" ToRole="Cidade" />
+          <NavigationProperty Name="Estado" Relationship="EletrobidModel.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -526,6 +574,7 @@
           <Property Name="Nome" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CodigoIbge" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Cidade" Relationship="Self.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
+          <NavigationProperty Name="Empresa" Relationship="EletrobidModel.FK_Empresa_Estado" FromRole="Estado" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Imposto">
           <Key>
@@ -568,6 +617,9 @@
           <Property Name="QtdeProdutos" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Produto" Relationship="EletrobidModel.FK_Produto_Nfe" FromRole="Nfe" ToRole="Produto" />
           <NavigationProperty Name="Remessa" Relationship="EletrobidModel.FK_Remessa_Nfe" FromRole="Nfe" ToRole="Remessa" />
+          <Property Name="RemetenteNota" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CpfRemetente" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CnpjRemetente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -935,6 +987,14 @@
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Remessa" EntitySet="Remessa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Cidade" Association="EletrobidModel.FK_Empresa_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Estado" Association="EletrobidModel.FK_Empresa_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Produto_Nfe">
           <End Type="EletrobidModel.Nfe" Role="Nfe" Multiplicity="1" />
@@ -997,6 +1057,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Empresa_Cidade">
+          <End Type="EletrobidModel.Cidade" Role="Cidade" Multiplicity="1" />
+          <End Type="EletrobidModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="CidadeId" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="CidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Estado">
+          <End Type="EletrobidModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="EletrobidModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoId" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1017,6 +1101,11 @@
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="EletrobidModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
                 <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
@@ -1066,6 +1155,9 @@
           <EntitySetMapping Name="Nfe">
             <EntityTypeMapping TypeName="EletrobidModel.Nfe">
               <MappingFragment StoreEntitySet="Nfe">
+                <ScalarProperty Name="CnpjRemetente" ColumnName="CnpjRemetente" />
+                <ScalarProperty Name="CpfRemetente" ColumnName="CpfRemetente" />
+                <ScalarProperty Name="RemetenteNota" ColumnName="RemetenteNota" />
                 <ScalarProperty Name="QtdeProdutos" ColumnName="QtdeProdutos" />
                 <ScalarProperty Name="IdNfe" ColumnName="IdNfe" />
                 <ScalarProperty Name="NumeroNota" ColumnName="NumeroNota" />

@@ -34,6 +34,11 @@ namespace Eletrobid.Models
         public string Cep { get; set; }
         public bool EmpresaLeiloeira { get; set; }
         public int IdTipoEmpresa { get; set; }
+        public int Numero { get; set; }
+        public string Bairro { get; set; }
+        public string Complemento { get; set; }
+        public byte EstadoId { get; set; }
+        public int CidadeId { get; set; }
     
         public virtual TipoEmpresa TipoEmpresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,5 +49,7 @@ namespace Eletrobid.Models
         public virtual ICollection<Venda> Venda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Remessa> Remessa { get; set; }
+        public virtual Cidade Cidade { get; set; }
+        public virtual Estado Estado { get; set; }
     }
 }

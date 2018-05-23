@@ -89,6 +89,7 @@ namespace Eletrobid.Controllers
             return View(dadosNfe);
         }
 
+        [HttpPost]
         public ActionResult InserirNota(NfeViewModels dadosNfe)
         {
             #region Trata nota do tipo venda

@@ -18,6 +18,7 @@ namespace Eletrobid.Models
         public Estado()
         {
             this.Cidade = new HashSet<Cidade>();
+            this.Empresa = new HashSet<Empresa>();
         }
     
         public byte EstadoId { get; set; }
@@ -27,5 +28,7 @@ namespace Eletrobid.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cidade> Cidade { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empresa> Empresa { get; set; }
     }
 }

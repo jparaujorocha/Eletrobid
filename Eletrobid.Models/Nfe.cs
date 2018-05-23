@@ -31,6 +31,9 @@ namespace Eletrobid.Models
         public string CnpjDestinatario { get; set; }
         public int IdTipoNotaFiscal { get; set; }
         public int QtdeProdutos { get; set; }
+        public string RemetenteNota { get; set; }
+        public string CpfRemetente { get; set; }
+        public string CnpjRemetente { get; set; }
     
         public virtual TipoNotaFiscal TipoNotaFiscal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

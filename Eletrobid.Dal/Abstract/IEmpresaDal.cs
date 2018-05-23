@@ -19,7 +19,7 @@ namespace Eletrobid.Dal
         void ExcluiEmpresa(int idEmpresa);
 
         IEnumerable<Empresa> ListaEmpresas();
-
+        IEnumerable<TipoEmpresa> ListaTipoEmpresa();
         IEnumerable<Empresa> ListaEmpresas(int idTipoEmpresa);
         
     }

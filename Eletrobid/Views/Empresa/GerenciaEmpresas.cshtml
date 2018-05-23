@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Eletrobid.Models.Empresa>
+
+@{
+    ViewBag.Title = "Gerencia de Empresas";
+}
+
+<h2 class="text-center">Empresas</h2>
+
+<div class="float-right">
+    <p>@Html.ActionLink("Inserir Empresa", "InserirEmpresa", null, new { @class = "btn btn-success btn-sm" })</p>
+</div>
+<div>
+    <table class="table table-hover table-responsive-xl text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RazaoSocial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeFantasia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cnpj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpresaLeiloeira)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdTipoEmpresa)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <a href="@Url.Action("DetalhesEmpresa", "Empresa", new { idEmpresa = item.IdEmpresa })"> @item.IdEmpresa </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeFantasia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </td>
+                    @if (item.EmpresaLeiloeira == true)
+                {
+                        <td>
+                            Sim
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Não
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoEmpresa.Nome)
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+</div>

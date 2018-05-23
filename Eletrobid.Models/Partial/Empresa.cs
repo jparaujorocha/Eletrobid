@@ -24,17 +24,26 @@ namespace Eletrobid.Models
         [Display(Name = "CNPJ"), Required(ErrorMessage = "CNPJ Obrigatório"), StringLength(14, MinimumLength = 14)]
         public string Cnpj { get; set; }
 
-        [Display(Name = "Telefone Contato 1"), Required(ErrorMessage = "Telefone de Contato Obrigatório"), StringLength(18, MinimumLength = 11)]
+        [Display(Name = "Telefone de Contato 1"), Required(ErrorMessage = "Telefone de Contato Obrigatório"), StringLength(18, MinimumLength = 10)]
         public string TelefoneContato1 { get; set; }
 
-        [Display(Name = "Telefone Contato 2"), StringLength(18, MinimumLength = 11)]
+        [Display(Name = "Telefone de Contato 2"), StringLength(18, MinimumLength = 11)]
         public string TelefoneContato2 { get; set; }
 
         [Display(Name = "Margem de lucro")]
         public float MargemLucro { get; set; }
 
-        [Display(Name = "Endereço"), Required(ErrorMessage = "Endereço da empresa obrigatório"), StringLength(255, MinimumLength = 10)]
+        [Display(Name = "Logradouro(Rua, Av, etc)"), Required(ErrorMessage = "Endereço da empresa obrigatório"), StringLength(255)]
         public string Endereco { get; set; }
+
+        [Display(Name = "Número"), Required(ErrorMessage = "Número do endereço da empresa obrigatório")]
+        public int Numero { get; set; }
+
+        [Display(Name = "Bairro"), Required(ErrorMessage = "Bairro da empresa obrigatório"), StringLength(255)]
+        public string Bairro { get; set; }
+
+        [Display(Name = "Complemento"), StringLength(50)]
+        public string Complemento { get; set; }
 
         [Display(Name = "CEP"), Required(ErrorMessage = "CEP obrigatório"), StringLength(9, MinimumLength = 8)]
         public string Cep { get; set; }
@@ -44,5 +53,11 @@ namespace Eletrobid.Models
 
         [Display(Name = "Tipo de Empresa"), Required(ErrorMessage = "Campo obrigatório")]
         public int IdTipoEmpresa { get; set; }
+
+        [Display(Name = "Estado"), Required(ErrorMessage = "Campo obrigatório")]
+        public int EstadoId { get; set; }
+
+        [Display(Name = "Cidade"), Required(ErrorMessage = "Campo obrigatório")]
+        public int CidadeId { get; set; }
     }
 }
